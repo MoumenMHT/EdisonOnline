@@ -1,12 +1,11 @@
 ﻿<script setup lang="ts">
-import { computed, ref } from 'vue';
+import {  ref } from 'vue';
 import { ModelResultData } from '@interface/Model.ts';
 import { ManuscriptProgress, ManuscriptRevision } from '@interface/Manuscript.ts';
 import { ManuscriptService } from '@service/manuscript.service.ts';
 import { ReportIndex } from '@interface/Report.ts';
 import { useMainStore } from '@store/main.ts';
 import ReportIcon from '@component/report/reportIcon.vue';
-import Loader from '@component/loader.vue';
 import router from '@core/router.ts';
 import { useRoute } from 'vue-router';
 
@@ -29,9 +28,6 @@ const manuscriptRevisionData = ref<ManuscriptRevision>(<ManuscriptRevision>{
     progress: {},
     title: ""
 });
-const trialReportDataLoading = ref(true);
-const trialReportMetaDataLoading = ref(true);
-const loading = computed(() => trialReportDataLoading.value || trialReportMetaDataLoading.value);
 
 ManuscriptService.getTrialReportData().then(request => {
     if (request.data.value) {
@@ -143,7 +139,7 @@ const navigate = (place: string | number) => {
 <!--                </div>-->
             </div>
             <div class="content manuscript-content-container">
-                <div v-if="modelsData !== undefined && modelsData.length > 0">
+                <div >
                     <router-view
                         :isAdmin="isAdmin"
                         :isSimilarBook="isSimilarBook"
@@ -152,16 +148,7 @@ const navigate = (place: string | number) => {
                         :modelData="modelsData"
                     />
                 </div>
-                <div v-else-if="loading">
-                    <loader />
-                </div>
-                <div v-else>
-<!--                    <div v-if="completeFailure">-->
-<!--                        Alle reporter er fejlet i at blive analyseret af edison.-->
-<!--                    </div>-->
-<!--                    <div v-else>Fejlede i at hente manuscriptet. Prøv igen senere.</div>-->
-                    <div>Fejlede i at hente manuscriptet. Prøv igen senere.</div>
-                </div>
+                
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-/*
+/* all api  request here
 import { createFetch } from "@vueuse/core";
 import { getAccessToken, isAuthenticated } from '@core/auth.ts';
 
@@ -23,6 +23,7 @@ export const useMyFetch = createFetch({
 })
 */
 
+// Blocking all api requests for maintainance
 import { createFetch } from "@vueuse/core";
 import { getAccessToken, isAuthenticated } from '@core/auth.ts';
 
