@@ -31,7 +31,7 @@
         </div>
 
         <div class="progress-container ml-4 md:ml-8 relative text-black rounded-full flex items-center justify-between px-4">
-          <span class="waiting text-sm z-10">Næsten færdig...fortsæt med at skrive</span>
+          <span class="waiting text-base z-10">Næsten færdig...fortsæt med at skrive</span>
         </div>
 
         <div class="progress-bar ml-4 md:ml-8">
@@ -45,7 +45,7 @@
 
 
 
-        <div class="score-table ml-4 md:ml-6 mt-3">
+        <div class="score-table ml-4 md:ml-7 mt-3">
           <table>
             <thead>
               <tr>
@@ -309,8 +309,8 @@
         </div>
       </div>
 
-      <div class="right">
-        <div class="info bg-gray-100 rounded-xl p-6 text-center shadow-sm">
+      <div class="right   gap-6">
+        <div class="info  rounded-xl p-6 text-center shadow-sm">
           <div class="justify-center m-auto">
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <rect width="40" height="40" fill="url(#pattern0_1_317)"/>
@@ -329,7 +329,7 @@
           </p>
         </div>
 
-        <div class="info bg-gray-100 rounded-xl p-6 text-center shadow-sm mt-4">
+        <div class="info2   rounded-xl  text-center shadow-sm ">
           <div class="justify-center m-auto">
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <rect width="40" height="40" fill="url(#pattern0_1_317)"/>
@@ -386,13 +386,14 @@ html, body {
 }
 
 .dropdown {
-  border-radius: 1.5rem;
+  border-radius: 60px;
   background-color: #000;
   padding: 0.75rem 1rem;
   display: flex;
   align-items: center;
   width: 100%;
   max-width: 90%;
+  height: 60px;
   box-sizing: border-box;
 }
 
@@ -416,7 +417,7 @@ html, body {
   position: relative;
   background-color: #00000017;
   border-radius: 1.5rem;
-  height: clamp(2.5rem, 8vw, 3.75rem);
+  height: clamp(4.5rem, 8vw, 3.75rem);
   width: 100%;
   max-width: 90%;
   box-sizing: border-box;
@@ -432,7 +433,7 @@ html, body {
   background-color: #ffffff;
   border-radius: 1.5rem;
   height: 0.3125rem;
-  width: 80%;
+  width: 85%;
   max-width: 90%;
   top: -1rem;
   left: 1rem;
@@ -465,7 +466,7 @@ html, body {
 .waiting {
   font-family: 'Spline Sans', sans-serif;
   font-weight: 500;
-  font-size: clamp(0.75rem, 2.5vw, 1rem);
+  font-size: clamp(rem, 2.5vw, 1rem);
   color: #00000059;
   width: 100%;
   white-space: nowrap;
@@ -477,22 +478,24 @@ html, body {
 .score-table {
   font-family: 'Spline Sans', sans-serif;
   width: 100%;
-  max-width: 31rem;
-  border-collapse: collapse;
+  max-width: 31rem; 
   position: relative;
   padding: 0.625rem;
-  border-radius: 1.5625rem;
+  border-radius: 25px;
   left: 0.625rem;
+  color: #000;
+  background-color: white;
 }
 
 table {
   width: 100%;
-  border-collapse: separate;
-  border-radius: 1.5625rem;
-  overflow: visible;
+  border-radius: 25px;
+  border-collapse: separate; /* Important */
+  overflow: visible; /* Optional: helps with rounding inner content */
   color: #000;
   background-color: rgb(248, 248, 248);
 }
+
 
 .GoodRead {
   background-color: #e4b20030;
@@ -518,6 +521,19 @@ th {
   background-color: #e4b20030;
   font-weight: bold;
   padding: 0.5rem;
+}
+
+table th:first-child {
+  border-top-left-radius: 20px;
+}
+table th:last-child {
+  border-top-right-radius: 20px;
+}
+
+.lastTD{
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: #f8f7f9;
 }
 
 .category {
@@ -552,7 +568,6 @@ td {
   color: #000;
   cursor: pointer;
 
-  font-family: Spline Sans;
   font-weight: 900;
   font-size: 20px;
   line-height: 100%;
@@ -581,11 +596,26 @@ td {
 .info {
   margin: 1rem auto;
   width: 100%;
+  font-family: 'Spline Sans', sans-serif;
   max-width: 26.125rem;
-  min-height: 22rem;
+  background-color: #00000017;
   padding: 1.5rem;
   border-radius: 1.5625rem;
   box-sizing: border-box;
+}
+
+.info2{
+  margin: auto;
+  font-family: 'Spline Sans', sans-serif;
+  margin-top: 170px;
+  width: 100%;
+  max-width: 26.125rem;
+  background-color: #00000017;
+  height: 528px;
+  padding: 1.5rem;
+  border-radius: 1.5625rem;
+  box-sizing: border-box;
+
 }
 
 .icon {
