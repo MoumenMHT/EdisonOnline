@@ -523,6 +523,9 @@ th {
   padding: 0.5rem;
 }
 
+table tr:first-child{
+    font-weight: 600;
+}
 table th:first-child {
   border-top-left-radius: 20px;
 }
