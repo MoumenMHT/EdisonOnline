@@ -1,0 +1,49 @@
+﻿.RAG {
+    &.R {
+        &.text {
+            color: var(--RAG-R-text);
+        }
+        &.border {
+            border-color: var(--RAG-R-border);
+        }
+        &.bg {
+            background-color: var(--RAG-R);
+        }
+
+        &svg, > svg {
+            fill: var(--RAG-R);
+        }
+    }
+
+    &.A {
+        &.text {
+            color: var(--RAG-A-text);
+        }
+        &.border {
+            border-color: var(--RAG-A-border);
+        }
+        &.bg {
+            background-color: var(--RAG-A);
+        }
+
+        &svg, > svg {
+            fill: var(--RAG-A);
+        }
+    }
+
+    &.G {
+        &.text {
+            color: var(--RAG-G-text);
+        }
+        &.border {
+            border-color: var(--RAG-G-border);
+        }
+        &.bg {
+            background-color: var(--RAG-G);
+        }
+
+        &svg, > svg {
+            fill: var(--RAG-G);
+        }
+    }
+}

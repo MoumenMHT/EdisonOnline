@@ -1,0 +1,419 @@
+﻿@use "sass:string";
+@use "sass:color";
+
+@function getVariableName($style, $prop, $state: "") {
+    @if string.length($state) == 0 {
+        @return var(--btn-#{$style}-#{$prop});
+    }
+
+    @return var(--btn-#{$style}-#{$prop}-#{$state});
+}
+
+@mixin button($style, $type: "", $border: true) {
+    &:enabled {
+        &:hover {
+            color: getVariableName($style, "color", "hover");
+            @if $type == "outlined" or $type == "text" {
+                background: rgba(getVariableName($style, "background", "rgb"), 0.08);
+                color: getVariableName($style, "background");
+                @if $border {
+                    border: 1px solid;
+                }
+            } @else {
+                background: getVariableName($style, "background", "hover");
+                @if $border {
+                    border: 1px solid getVariableName($style, "background", "hover");
+                }
+            }
+        }
+
+        &:active {
+            color: getVariableName($style, "color", "active");
+            @if $type == "outlined" or $type == "text" {
+                background: rgba(getVariableName($style, "background", "rgb"), 0.16);
+                color: getVariableName($style, "background");
+                @if $border {
+                    border: 1px solid;
+                }
+            } @else {
+                background: getVariableName($style, "background", "active");
+                @if $border {
+                    border: 1px solid getVariableName($style, "background", "active");
+                }
+            }
+        }
+
+        &:focus {
+            box-shadow: 0 0 0 2px var(--primary-color-text), 0 0 0 4px getVariableName($style, "box", "shadow"), 0 1px 2px 0 black;
+            //box-shadow: getVariableName($style, "focus", "ring");
+        }
+    }
+
+    @if ($type == "outlined") {
+        color: getVariableName($style, "background");
+        background: transparent;
+        border: 1px solid;
+    } @else if ($type == "text") {
+        color: getVariableName($style, "background");
+        background: transparent;
+        border-color: transparent;
+    } @else {
+        color: getVariableName($style, "color");
+        background: getVariableName($style, "background");
+        border: 1px solid getVariableName($style, "background");
+    }
+}
+
+$styles: "secondary", "success", "info", "warning", "help", "danger", "dark";
+
+.p-button {
+    @include button("primary");
+    padding: var(--btn-padding);
+    font-size: 1rem;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border-radius: var(--border-radius);
+
+    &.p-disabled {
+        background-color: var(--gray-300) !important;
+        border: 1px solid var(--gray-500) !important;
+    }
+    
+    &:focus {
+        outline: 0 none;
+        outline-offset: 0;
+    }
+
+    &.p-button-outlined {
+        @include button("primary", "outlined");
+
+        &.p-button-plain {
+            color: var(--btn-plain-color);
+            border-color: var(--btn-plain-color);
+
+            &:enabled{
+                &:hover {
+                    background: var(--btn-plain-background-hover);
+                    color: var(--btn-plain-color-hover);
+                }
+                &:active {
+                    background: var(--btn-plain-background-active);
+                    color: var(--btn-plain-color-active);
+                }
+            }
+        }
+    }
+
+    &.p-button-text {
+        @include button("primary", "text");
+
+        &.p-button-plain {
+            color: var(--btn-plain-color);
+
+            &:enabled {
+                &:hover {
+                    background: var(--btn-plain-background-hover);
+                    color: var(--btn-plain-color-hover);
+                }
+                &:active {
+                    background: var(--btn-plain-background-active);
+                    color: var(--btn-plain-color-active);
+                }
+            }
+        }
+    }
+
+    .p-button-icon-left {
+        margin-right: var(--inline-spacing);
+    }
+
+    .p-button-icon-right {
+        margin-left: var(--inline-spacing);
+    }
+
+    .p-button-icon-bottom {
+        margin-top: var(--inline-spacing);
+    }
+
+    .p-button-icon-top {
+        margin-bottom: var(--inline-spacing);
+    }
+
+    .p-badge {
+        margin-left: var(--inline-spacing);
+        min-width: 1rem;
+        height: 1rem;
+        line-height: 1rem;
+        color: var(--btn-primary-background);
+        background-color: var(--btn-primary-color);
+    }
+
+    &.p-button-raised {
+        box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    }
+
+    &.p-button-rounded {
+        border-radius: 2rem;
+    }
+
+    &.p-button-icon-only {
+        width: 3rem;
+        padding: 0.75rem;
+
+        .p-button-icon-left,
+        .p-button-icon-right {
+            margin: 0;
+        }
+
+        &.p-button-rounded {
+            border-radius: 50%;
+            height:3rem;
+        }
+    }
+
+    &.p-button-sm {
+        padding: var(--btn-padding-sm);
+        font-size: 0.875rem;
+
+        .p-button-icon {
+            font-size: 0.875rem;
+        }
+    }
+
+    &.p-button-lg {
+        padding: var(--btn-padding-lg);
+        font-size: 1.25rem;
+
+        .p-button-icon {
+            font-size: 1.25rem;
+        }
+    }
+
+    &.p-button-loading-label-only {
+        .p-button-label {
+            margin-left: var(--inline-spacing);
+        }
+
+        .p-button-loading-icon {
+            margin-right: 0;
+        }
+    }
+
+    &.p-button-link {
+        color: var(--primary-color);
+        background: transparent;
+        border: 1px solid transparent;
+
+        &:enabled {
+            &:hover {
+                background: transparent;
+                color: var(--primary-color-hover);
+                border-color: transparent;
+
+                .p-button-label {
+                    text-decoration: underline;
+                }
+            }
+            &:focus {
+                background: transparent;
+                box-shadow: var(--focus-ring);
+                border-color: transparent;
+            }
+            &:active {
+                background: transparent;
+                color: var(--primary-color-active);
+                border-color: transparent;
+            }
+        }
+    }
+
+    &.p-fileupload-choose:not(.p-disabled):hover {
+        background: var(--btn-primary-background-hover);
+        color: var(--btn-primary-color-hover);
+        border-color: var(--btn-primary-background-hover);
+    }
+    
+    @each $style in $styles {
+        &.p-button-#{$style} {
+            @include button($style);
+
+            &.p-button-outlined {
+                @include button($style, "outlined");
+            }
+
+            &.p-button-text {
+                @include button($style, "text");
+            }
+        }
+    }
+}
+
+.p-buttonset {
+    @each $style in $styles {
+        &.p-button-#{$style} {
+            > .p-button {
+                @include button($style);
+
+                &.p-button-outlined {
+                    @include button($style, "outlined");
+                }
+
+                &.p-button-text {
+                    @include button($style, "text");
+                }
+            }
+        }
+    }
+    .p-button{
+        &:not(:last-child) {
+            border-right: 0 none;
+        }
+        &:first-of-type:not(:only-of-type) {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        &:last-of-type:not(:only-of-type) {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    }
+}
+
+.p-splitbutton {
+    border-radius: 6px;
+
+    > .p-button {
+        @include button("primary", $border: false);
+
+        &:not(.p-splitbutton-menubutton) {
+            border-width: 1px 0 1px 1px !important;
+        }
+    }
+
+    &.p-button-raised {
+        box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    }
+    &.p-button-rounded {
+        border-radius: 2rem;
+
+        > .p-button {
+            border-radius: 2rem;
+        }
+    }
+
+    &.p-button-sm {
+        > .p-button {
+            font-size: 0.875rem;
+            padding: 0.65625rem 1.09375rem;
+
+            .p-button-icon {
+                font-size: 0.875rem;
+            }
+        }
+    }
+    &.p-button-lg {
+        > .p-button {
+            font-size: 1.25rem;
+            padding: 0.9375rem 1.5625rem;
+
+            .p-button-icon {
+                font-size: 1.25rem;
+            }
+        }
+    }
+
+    &.p-button-outlined > .p-button {
+        @include button("primary", "outlined", false);
+    }
+    &.p-button-text > .p-button {
+        @include button("primary", "text", false);
+    }
+
+    @each $style in $styles {
+        &.p-button-#{$style} {
+            > .p-button {
+                @include button($style, $border: false);
+            }
+
+            &.p-button-outlined {
+                > .p-button {
+                    @include button($style, "outlined", false);
+                }
+            }
+
+            &.p-button-text {
+                > .p-button {
+                    @include button($style, "text", false);
+                }
+            }
+        }
+    }
+}
+
+.p-button-label {
+    font-weight: 700;
+}
+
+.p-fluid {
+
+    .p-button {
+        width: 100%;
+    }
+
+    .p-button-icon-only {
+        width: 3rem;
+    }
+
+    .p-buttonset {
+        display: flex;
+    }
+
+    .p-buttonset {
+
+        .p-button {
+            flex: 1;
+        }
+    }
+}
+// TODO - Fix the styles below to use the correct variables
+.p-selectbutton {
+    .p-button {
+        background: var(--form-background);
+        border: 1px solid var(--form-border);
+        color: var(--text-color);
+        transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+
+        &:not(.p-disabled):not(.p-highlight):hover {
+            background: var(--hover-background);
+            border-color: var(--form-border);
+            color: var(--text-color);
+            
+            .p-button-icon-left, .p-button-icon-right {
+                color: var(--hover-color);
+            }
+        }
+        
+        &.p-highlight {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: var(--primary-color-text);
+
+            .p-button-icon-left, .p-button-icon-right {
+                color: var(--primary-color-text);
+            }
+            
+            &:hover {
+                background: var(--primary-color-hover);
+                border-color: var(--primary-color-hover);
+                color: var(--primary-color-text);
+
+                .p-button-icon-left, .p-button-icon-right {
+                    color: var(--primary-color-text);
+                }
+            }
+        }
+        
+        .p-button-icon-left, .p-button-icon-right {
+            color: var(--text-color-secondary);
+        }
+    }
+}

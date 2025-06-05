@@ -1,0 +1,43 @@
+@mixin arrow-rotate($deg) {
+    > #arrow {
+        transform-origin: center;
+        transform: rotate($deg);
+    }
+}
+
+svg {
+    &.fill-primary {
+        fill: var(--primary-color);
+    }
+
+    &.fill-white {
+        fill: #fff;
+    }
+
+    &.arrow {
+        &.N {
+            @include arrow-rotate(0deg);
+        }
+        &.NE {
+            @include arrow-rotate(45deg);
+        }
+        &.E {
+            @include arrow-rotate(90deg);
+        }
+        &.SE {
+            @include arrow-rotate(135deg);
+        }
+        &.S {
+            @include arrow-rotate(180deg);
+        }
+        &.SW {
+            @include arrow-rotate(225deg);
+        }
+        &.W {
+            @include arrow-rotate(270deg);
+        }
+        &.NW {
+            @include arrow-rotate(315deg);
+        }
+    }
+}

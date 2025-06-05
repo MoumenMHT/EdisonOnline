@@ -1,0 +1,241 @@
+.p-input-filled .p-cascadeselect {
+    background: var(--hover-background);
+}
+.p-input-filled .p-cascadeselect:not(.p-disabled):hover {
+    background-color: var(--hover-background);
+}
+.p-input-filled .p-cascadeselect:not(.p-disabled).p-focus {
+    background-color: var(--form-background);
+}
+.p-input-filled .p-checkbox .p-checkbox-box {
+    background-color: var(--form-filled-background);
+}
+.p-input-filled .p-checkbox .p-checkbox-box.p-highlight {
+    background: var(--primary-color);
+}
+.p-input-filled .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:hover {
+    background-color: var(--form-filled-background);
+}
+.p-input-filled .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+    background: var(--primary-color);
+}
+.p-input-filled .p-dropdown {
+    background: var(--hover-background);
+}
+.p-input-filled .p-dropdown:not(.p-disabled):hover {
+    background-color: var(--hover-background);
+}
+.p-input-filled .p-dropdown:not(.p-disabled).p-focus {
+    background-color: var(--form-background);
+}
+.p-input-filled .p-dropdown:not(.p-disabled).p-focus .p-inputtext {
+    background-color: transparent;
+}
+.p-inputgroup-addon {
+    background: var(--hover-background);
+    color: var(--text-color-secondary);
+    border-top: 1px solid var(--form-border);
+    border-left: 1px solid var(--form-border);
+    border-bottom: 1px solid var(--form-border);
+    padding: 0.75rem 0.75rem;
+    min-width: 3rem;
+}
+.p-inputgroup-addon:last-child {
+    border-right: 1px solid var(--form-border);
+}
+
+.p-inputgroup > .p-component,
+.p-inputgroup > .p-element,
+.p-inputgroup > .p-inputwrapper > .p-component > .p-inputtext,
+.p-inputgroup > .p-float-label > .p-component {
+    border-radius: 0;
+    margin: 0;
+}
+.p-inputgroup > .p-component + .p-inputgroup-addon,
+.p-inputgroup > .p-element + .p-inputgroup-addon,
+.p-inputgroup > .p-inputwrapper > .p-component > .p-inputtext + .p-inputgroup-addon,
+.p-inputgroup > .p-float-label > .p-component + .p-inputgroup-addon {
+    border-left: 0 none;
+}
+.p-inputgroup > .p-component:focus,
+.p-inputgroup > .p-element:focus,
+.p-inputgroup > .p-inputwrapper > .p-component > .p-inputtext:focus,
+.p-inputgroup > .p-float-label > .p-component:focus {
+    z-index: 1;
+}
+.p-inputgroup > .p-component:focus ~ label,
+.p-inputgroup > .p-element:focus ~ label,
+.p-inputgroup > .p-inputwrapper > .p-component > .p-inputtext:focus ~ label,
+.p-inputgroup > .p-float-label > .p-component:focus ~ label {
+    z-index: 1;
+}
+.p-inputgroup-addon:first-child,
+.p-inputgroup button:first-child,
+.p-inputgroup input:first-child,
+.p-inputgroup > .p-inputwrapper:first-child > .p-component,
+.p-inputgroup > .p-inputwrapper:first-child > .p-component > .p-inputtext {
+    border-top-left-radius: var(--border-radius);
+    border-bottom-left-radius: var(--border-radius);
+}
+.p-inputgroup .p-float-label:first-child input {
+    border-top-left-radius: var(--border-radius);
+    border-bottom-left-radius: var(--border-radius);
+}
+.p-inputgroup-addon:last-child,
+.p-inputgroup button:last-child,
+.p-inputgroup input:last-child,
+.p-inputgroup > .p-inputwrapper:last-child > .p-component,
+.p-inputgroup > .p-inputwrapper:last-child > .p-component > .p-inputtext {
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+}
+
+.p-inputgroup .p-float-label:last-child input {
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+}
+.p-input-icon-left > i:first-of-type {
+    left: 0.75rem;
+    color: var(--text-color-secondary);
+}
+
+.p-input-icon-left > .p-inputtext {
+    padding-left: 2.5rem;
+}
+.p-inputtext {
+    font-family: var(--font-family);
+    font-size: 1rem;
+    color: var(--text-color);
+    background: var(--form-background);
+    padding: 0.75rem 0.75rem;
+    border: 1px solid var(--form-border);
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+    border-radius: var(--border-radius);
+}
+.p-inputtext:enabled:hover {
+    border-color: var(--form-border-hover);
+}
+.p-inputtext:enabled:focus {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: var(--focus-ring);
+    border-color: var(--form-border-focus);
+}
+.p-inputtext.ng-dirty.ng-invalid {
+    border-color: var(--error);
+}
+.p-inputtext.p-inputtext-sm {
+    font-size: 0.875rem;
+    padding: 0.65625rem 0.65625rem;
+}
+.p-inputtext.p-inputtext-lg {
+    font-size: 1.25rem;
+    padding: 0.9375rem 0.9375rem;
+}
+.p-inputswitch {
+    width: 3rem;
+    height: 1.75rem;
+}
+.p-inputswitch .p-inputswitch-slider {
+    background: var(--form-border);
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border-radius: 30px;
+}
+.p-inputswitch .p-inputswitch-slider:before {
+    background: var(--form-background);
+    width: 1.25rem;
+    height: 1.25rem;
+    left: 0.25rem;
+    margin-top: -0.625rem;
+    border-radius: 50%;
+    transition-duration: 0.2s;
+}
+.p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:before {
+    transform: translateX(1.25rem);
+}
+.p-inputswitch.p-focus .p-inputswitch-slider {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: var(--focus-ring);
+}
+.p-inputswitch:not(.p-disabled):hover .p-inputswitch-slider {
+    background: var(--form-background-hover);
+}
+.p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+    background: var(--primary-color);
+}
+.p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:before {
+    background: var(--form-background);
+}
+.p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
+    background: var(--primary-color-hover);
+}
+
+p-inputswitch.ng-dirty.ng-invalid > .p-inputswitch {
+    border-color: var(--error);
+}
+.p-input-icon-left.p-float-label > label {
+    left: 2.5rem;
+}
+
+.p-input-icon-right > i:last-of-type {
+    right: 0.75rem;
+    color: var(--text-color-secondary);
+}
+
+.p-input-icon-right > .p-inputtext {
+    padding-right: 2.5rem;
+}
+.p-input-filled .p-inputtext {
+    background-color: var(--form-filled-background);
+}
+.p-input-filled .p-inputtext:enabled:hover {
+    background-color: var(--hover-background);
+}
+.p-input-filled .p-inputtext:enabled:focus {
+    background-color: var(--form-background);
+}
+
+.p-inputtext-sm .p-inputtext {
+    font-size: 0.875rem;
+    padding: 0.65625rem 0.65625rem;
+}
+
+.p-inputtext-lg .p-inputtext {
+    font-size: 1.25rem;
+    padding: 0.9375rem 0.9375rem;
+}
+.p-input-filled .p-multiselect {
+    background: var(--hover-background);
+}
+.p-input-filled .p-multiselect:not(.p-disabled):hover {
+    background-color: var(--hover-background);
+}
+.p-input-filled .p-multiselect:not(.p-disabled).p-focus {
+    background-color: var(--form-background);
+}
+.p-input-filled .p-radiobutton .p-radiobutton-box {
+    background-color: var(--form-filled-background);
+}
+.p-input-filled .p-radiobutton .p-radiobutton-box:not(.p-disabled):hover {
+    background-color: var(--hover-background);
+}
+.p-input-filled .p-radiobutton .p-radiobutton-box.p-highlight {
+    background: var(--primary-color);
+}
+.p-input-filled .p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
+    background: var(--highlight-color);
+}
+.p-inputwrapper-filled .p-treeselect.p-treeselect-chip .p-treeselect-label {
+    padding: 0.375rem 0.75rem;
+}
+.p-input-filled .p-treeselect {
+    background: var(--form-filled-background);
+}
+.p-input-filled .p-treeselect:not(.p-disabled):hover {
+    background-color: var(--hover-background);
+}
+.p-input-filled .p-treeselect:not(.p-disabled).p-focus {
+    background-color: var(--form-background);
+}

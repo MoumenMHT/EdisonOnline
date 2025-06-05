@@ -1,0 +1,43 @@
+{
+  "name": "edison-online",
+  "private": true,
+  "version": "0.9.16",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "validate": "vue-tsc",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview",
+    "apiToTs": "npx @openapitools/openapi-generator-cli generate -i OpenAPI/scheme/backend.yaml -g typescript-fetch -o ./OpenAPI/output/schema-fetch-2/ --additional-properties=stringEnums=true,withoutRuntimeChecks=true"
+  },
+  "dependencies": {
+    "@auth0/auth0-vue": "^2.3.2",
+    "@kurkle/color": "^0.3.2",
+    "@types/wpapi": "^1.1.4",
+    "@vitejs/plugin-vue-jsx": "^3.1.0",
+    "@vueuse/core": "^10.8.0",
+    "chart.js": "^4.4.0",
+    "js-sha256": "^0.11.0",
+    "lodash": "^4.17.21",
+    "pinia": "^2.1.7",
+    "primeflex": "^3.3.1",
+    "primeicons": "^7.0.0",
+    "primevue": "^3.49.1",
+    "rollup-plugin-visualizer": "^5.9.2",
+    "vue": "^3.3.8",
+    "vue-router": "^4.4.0",
+    "wpapi": "^1.2.2"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.201",
+    "@types/node": "^20.9.0",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "@vue/compiler-sfc": "^3.3.8",
+    "sass": "^1.69.5",
+    "tslib": "^2.6.2",
+    "typescript": "^5.2.2",
+    "vite": "5.4.6",
+    "vite-svg-loader": "^4.0.0",
+    "vue-tsc": "^1.8.22"
+  }
+}

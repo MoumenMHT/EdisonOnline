@@ -1,0 +1,2997 @@
+openapi: 3.0.3
+info:
+  version: '1.0'
+  title: Edison Backend API
+
+servers:
+  - url: http://localhost:8080
+
+paths:
+  /api/author/status:
+    get:
+      summary: return info about the current user
+      operationId: getAuthorStatus
+      responses:
+        200:
+          description: User info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorStatus'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/author/email:
+    post:
+      summary: provide the users email (if not provided by auth0) - note will be overwritten by the value from auth0 if auth0 provides one.
+      operationId: setAuthorEmail
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - email
+              properties:
+                email:
+                  type: string
+      responses:
+        204:
+          description: No content
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/admin/authors/:
+    get:
+      summary: lists authors
+      operationId: adminGetAuthors
+      parameters:
+        - name: email
+          description: search for author with this email
+          in: query
+          schema:
+            type: string
+          required: false
+        - name: roles
+          description: comma-separated list of roles, show only authors with one of the roles
+          in: query
+          schema:
+            type: string
+          required: false
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 0
+          required: false
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            default: 10
+          required: false
+        - name: sortBy
+          description: sort authors by this field, default is CREATED
+          in: query
+          schema:
+            type: string
+            enum:
+              - NAME
+              - NAME_DESC
+              - CREATED
+              - CREATED_DESC
+          required: false
+      responses:
+        200:
+          description: Page of Author
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfAuthor'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/admin/authors/{authorId}/:
+    get:
+      summary: gets a specific author
+      operationId: adminGetAuthor
+      parameters:
+        - name: authorId
+          in: path
+          schema:
+            type: string
+            format: uuid
+          required: true
+      responses:
+        200:
+          description: Page of Author
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/admin/engines/:
+    get:
+      summary: lists authors
+      operationId: getEngines
+      responses:
+        200:
+          description: List of EngineInfo
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EngineInfo'
+
+  /api/author/history/:
+    get:
+      summary: lists of events for the author
+      operationId: getHistory
+      parameters:
+        - name: startTime
+          in: query
+          schema:
+            type: string
+            format: date-time
+          required: false
+          description: filters history so only events with an eventTime greater or equal to this are considered
+          examples:
+            utc:
+              value: 2023-08-01T00:00:00Z
+            offset:
+              value: 2023-08-01T00:00:00+2:00
+        - name: endTime
+          in: query
+          schema:
+            type: string
+            format: date-time
+          required: false
+          description: filters history so only events with an eventTime less or equal to this are considered
+          examples:
+            utc:
+              value: 2023-08-01T23:59:59.999999Z
+            offset:
+              value: 2023-08-01T23:59:59.999999+2:00
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 0
+          required: false
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            default: 10
+          required: false
+      responses:
+        200:
+          description: Page of HistoryEvent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfHistoryEvent'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/admin/authors/{authorId}/history/:
+    get:
+      summary: lists of events for an author
+      operationId: adminGetAuthorHistory
+      parameters:
+        - name: authorId
+          in: path
+          schema:
+            type: string
+            format: uuid
+          required: true
+        - name: startTime
+          in: query
+          schema:
+            type: string
+            format: date-time
+          required: false
+          description: filters history so only events with an eventTime greater or equal to this are considered
+          examples:
+            utc:
+              value: 2023-08-01T00:00:00Z
+            offset:
+              value: 2023-08-01T00:00:00+2:00
+        - name: endTime
+          in: query
+          schema:
+            type: string
+            format: date-time
+          required: false
+          description: filters history so only events with an eventTime less or equal to this are considered
+          examples:
+            utc:
+              value: 2023-08-01T23:59:59.999999Z
+            offset:
+              value: 2023-08-01T23:59:59.999999+2:00
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 0
+          required: false
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            default: 10
+          required: false
+      responses:
+        200:
+          description: Page of DetailedHistoryEvent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfDetailedHistoryEvent'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/author/subscriptions/:
+    get:
+      summary: lists of subscriptions for the author
+      operationId: getSubscriptions
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 0
+          required: false
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            default: 10
+          required: false
+      responses:
+        200:
+          description: Page of Subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfSubscription'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/author/invoices/:
+    get:
+      summary: lists of invoices for the author
+      operationId: getInvoices
+      parameters:
+        - name: type
+          in: query
+          schema:
+            $ref: '#/components/schemas/InvoiceType'
+          required: false
+          description: filters invoices so only invoices with this type are considered
+        - name: startTime
+          in: query
+          schema:
+            type: string
+            format: date-time
+          required: false
+          description: filters invoices so only invoices with an time greater or equal to this are considered
+          examples:
+            utc:
+              value: 2023-08-01T00:00:00Z
+            offset:
+              value: 2023-08-01T00:00:00+2:00
+        - name: endTime
+          in: query
+          schema:
+            type: string
+            format: date-time
+          required: false
+          description: filters invoices so only invoices with an time less or equal to this are considered
+          examples:
+            utc:
+              value: 2023-08-01T23:59:59.999999Z
+            offset:
+              value: 2023-08-01T23:59:59.999999+2:00
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 0
+          required: false
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            default: 10
+          required: false
+      responses:
+        200:
+          description: Page of Invoice
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfInvoice'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/author/purchases/:
+    get:
+      summary: lists of purchases for the author
+      operationId: getPurchases
+      parameters:
+        - name: status
+          in: query
+          schema:
+            $ref: '#/components/schemas/PurchaseStatus'
+          required: false
+          description: filters purchases so only purchases with this status are considered
+        - name: productType
+          in: query
+          schema:
+            $ref: '#/components/schemas/PaymentProductType'
+          required: false
+          description: filters purchases so only purchases with this type are considered
+        - name: startTime
+          in: query
+          schema:
+            type: string
+            format: date-time
+          required: false
+          description: filters purchases so only purchases with an time greater or equal to this are considered
+          examples:
+            utc:
+              value: 2023-08-01T00:00:00Z
+            offset:
+              value: 2023-08-01T00:00:00+2:00
+        - name: endTime
+          in: query
+          schema:
+            type: string
+            format: date-time
+          required: false
+          description: filters purchases so only purchases with an time less or equal to this are considered
+          examples:
+            utc:
+              value: 2023-08-01T23:59:59.999999Z
+            offset:
+              value: 2023-08-01T23:59:59.999999+2:00
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 0
+          required: false
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            default: 10
+          required: false
+      responses:
+        200:
+          description: Page of Purchase
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfPurchase'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/admin/authors/{authorId}/role:
+    patch:
+      summary: change the role for an author
+      operationId: adminSetRole
+      parameters:
+        - name: authorId
+          in: path
+          schema:
+            type: string
+            format: uuid
+          required: true
+        - name: newRole
+          in: query
+          schema:
+            $ref: '#/components/schemas/AuthorRole'
+          required: true
+      responses:
+        204:
+          description: No content
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/info/categories:
+    get:
+      summary: returns the genres and audiences
+      operationId: getCategories
+      responses:
+        200:
+          description: genres and audiences
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryInfo'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/info/lowest-queue-number:
+    get:
+      summary: returns an estimation of the lowest queue number
+      operationId: getLowestQueueNumber
+      responses:
+        200:
+          description: lowest queue number
+          content:
+            application/json:
+              schema:
+                type: integer
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        402:
+          description: 402 PaymentRequired (Subscription Required to access this content)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/manuscripts/:
+    get:
+      summary: lists manuscripts for the current user
+      operationId: getManuscripts
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            minimum: 10
+            maximum: 100
+            default: 10
+          required: false
+      responses:
+        200:
+          description: Page of Manuscript
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfManuscript'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Upload a manuscript
+      operationId: uploadManuscript
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - manuscriptTitle
+                - targetAudience
+                - targetGenre
+                - fileType
+                - file
+              properties:
+                manuscriptTitle:
+                  description: Title of a manuscript.
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                revisionTitle:
+                  description: |
+                    Title of a manuscript revision.
+                    If this field is null a title will be generated by combining the title of the manuscript
+                    and " v<x>" where <x> is the number of the revision.
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                targetAudience:
+                  type: string
+                  minLength: 3
+                  maxLength: 64
+                targetGenre:
+                  type: string
+                  minLength: 3
+                  maxLength: 64
+                fileType:
+                  type: string
+                  enum:
+                    - TEXT
+                    - DOCX
+                    - EPUB
+                file:
+                  type: string
+                  format: binary
+      responses:
+        201:
+          description: Manuscript
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManuscriptUploadResponse'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        402:
+          description: 402 PaymentRequired (Subscription Required to access this content)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        429:
+          description: 429 TooManyRequests (Rate Limiting)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/admin/manuscripts/:
+    get:
+      summary: return all manuscripts (optionally limit to specific author)
+      operationId: adminGetManuscripts
+      parameters:
+        - name: authorId
+          description: id of an author to limit the search to a specific author
+          in: query
+          schema:
+            type: string
+            format: uuid
+          required: false
+        - name: sortBy
+          in: query
+          schema:
+            type: string
+            enum:
+              - globalScore
+              - latestRevision
+          required: false
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            minimum: 10
+            maximum: 100
+            default: 10
+          required: false
+      responses:
+        200:
+          description: Page of Manuscript
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfManuscript'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/manuscripts/{manuscriptId}:
+    delete:
+      summary: deletes the manuscript with the given id (if the logged-in user is owner)
+      operationId: deleteManuscript
+      parameters:
+        - name: manuscriptId
+          in: path
+          schema:
+            type: string
+            format: uuid
+          required: true
+        - name: reason
+          description: a reason that will be visible to the user in their event history
+          in: query
+          schema:
+            type: string
+            minLength: 3
+            maxLength: 64
+          required: true
+        - name: additionalReason
+          description: an additional reason that will only be visible to admins
+          in: query
+          schema:
+            type: string
+            minLength: 3
+            maxLength: 80
+          required: false
+      responses:
+        204:
+          description: No content
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        402:
+          description: 402 PaymentRequired (Subscription Required to access this content)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/admin/manuscripts/{manuscriptId}:
+    delete:
+      summary: deletes the manuscript with the given id
+      operationId: adminDeleteManuscript
+      parameters:
+        - name: manuscriptId
+          in: path
+          schema:
+            type: string
+            format: uuid
+          required: true
+        - name: reason
+          description: a reason that will be visible to the user in their event history
+          in: query
+          schema:
+            type: string
+            minLength: 3
+            maxLength: 64
+          required: true
+        - name: additionalReason
+          description: an additional reason that will only be visible to admins
+          in: query
+          schema:
+            type: string
+            minLength: 3
+            maxLength: 80
+          required: false
+      responses:
+        204:
+          description: No content
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/manuscripts/{manuscriptId}/revisions/:
+    get:
+      summary: lists manuscript revisions for the current user
+      operationId: getManuscriptRevisions
+      parameters:
+        - name: manuscriptId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 10
+            maximum: 100
+            default: 10
+      responses:
+        200:
+          description: Page of ManuscriptRevision
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfManuscriptRevision'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Upload a manuscript
+      operationId: uploadManuscriptRevision
+      parameters:
+        - name: manuscriptId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - targetAudience
+                - targetGenre
+                - fileType
+                - file
+              properties:
+                revisionTitle:
+                  description: |
+                    Title of a manuscript revision.
+                    If this field is null a title will be generated by combining the title of the manuscript
+                    and " v<x>" where <x> is the number of the revision.
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                targetAudience:
+                  type: string
+                  minLength: 3
+                  maxLength: 64
+                targetGenre:
+                  type: string
+                  minLength: 3
+                  maxLength: 64
+                fileType:
+                  type: string
+                  enum:
+                    - TEXT
+                    - DOCX
+                    - EPUB
+                file:
+                  type: string
+                  format: binary
+      responses:
+        201:
+          description: Manuscript
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManuscriptUploadResponse'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        402:
+          description: 402 PaymentRequired (Subscription Required to access this content)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        429:
+          description: 400 TooManyRequests (Rate Limiting)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/admin/manuscripts/{manuscriptId}/revisions/:
+    get:
+      summary: lists manuscript revisions
+      operationId: adminGetManuscriptRevisions
+      parameters:
+        - name: manuscriptId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 10
+            maximum: 100
+            default: 10
+      responses:
+        200:
+          description: Page of ManuscriptRevision
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfManuscriptRevision'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/manuscripts/{manuscriptId}/title:
+    patch:
+      summary: Change the title of a manuscript
+      operationId: changeManuscriptTitle
+      parameters:
+        - name: manuscriptId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: newTitle
+          in: query
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 64
+      responses:
+        204:
+          description: No content
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        402:
+          description: 402 PaymentRequired (Subscription Required to access this content)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/admin/manuscripts/{manuscriptId}/title:
+    patch:
+      summary: Change the title of a manuscript
+      operationId: adminChangeManuscriptTitle
+      parameters:
+        - name: manuscriptId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: newTitle
+          in: query
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 64
+      responses:
+        204:
+          description: No content
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/similar-books/{isbn}:
+    get:
+      summary: returns the analyzed data for a similar book
+      operationId: getSimilarBookData
+      parameters:
+        - name: isbn
+          in: path
+          schema:
+            type: integer
+            format: int64
+          required: true
+        - name: models
+          description: comma-separated list of models to filter against. If this is null data from all models is returned
+          in: query
+          schema:
+            type: string
+          required: false
+        - name: sections
+          description: comma-separated list of sections to filter against. If this is null data from all sections is returned
+          in: query
+          schema:
+            type: string
+          required: false
+      responses:
+        200:
+          description: Analyzed Data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ModelResultData'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/similar-books/{isbn}/metadata:
+    get:
+      summary: returns the matedata data for a similar book
+      operationId: getSimilarBookMetadata
+      parameters:
+        - name: isbn
+          in: path
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        200:
+          description: Metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimilarBookMetadata'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/trial-report/:
+    get:
+      summary: returns the analyzed data for a similar book
+      operationId: getSimilarBookTrialReportData
+      parameters:
+        - name: models
+          description: comma-separated list of models to filter against. If this is null data from all models is returned
+          in: query
+          schema:
+            type: string
+          required: false
+        - name: sections
+          description: comma-separated list of sections to filter against. If this is null data from all sections is returned
+          in: query
+          schema:
+            type: string
+          required: false
+      responses:
+        200:
+          description: Analyzed Data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ModelResultData'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/trial-report/metadata:
+    get:
+      summary: returns the matedata data for a similar book
+      operationId: getSimilarBookTrialReportMetadata
+      parameters:
+        - name: isbn
+          in: path
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        200:
+          description: Metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimilarBookMetadata'
+
+  /api/manuscripts/{manuscriptId}/revisions/{revisionId}/:
+    get:
+      summary: returns the analyzed data for a revision
+      operationId: getAnalyzedData
+      parameters:
+        - name: manuscriptId
+          in: path
+          schema:
+            type: string
+            format: uuid
+          required: true
+        - name: revisionId
+          in: path
+          schema:
+            type: string
+            format: uuid
+          required: true
+        - name: models
+          description: comma-separated list of models to filter against. If this is null data from all models is returned
+          in: query
+          schema:
+            type: string
+          required: false
+        - name: sections
+          description: comma-separated list of sections to filter against. If this is null data from all sections is returned
+          in: query
+          schema:
+            type: string
+          required: false
+      responses:
+        200:
+          description: Analyzed Data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ModelResultData'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/admin/manuscripts/{manuscriptId}/revisions/{revisionId}/:
+    get:
+      summary: returns the analyzed data for a revision
+      operationId: adminGetAnalyzedData
+      parameters:
+        - name: manuscriptId
+          in: path
+          schema:
+            type: string
+            format: uuid
+          required: true
+        - name: revisionId
+          in: path
+          schema:
+            type: string
+            format: uuid
+          required: true
+        - name: models
+          description: comma-separated list of models to filter against. If this is null data from all models is returned
+          in: query
+          schema:
+            type: string
+          required: false
+        - name: sections
+          description: comma-separated list of sections to filter against. If this is null data from all sections is returned
+          in: query
+          schema:
+            type: string
+          required: false
+      responses:
+        200:
+          description: Analyzed Data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ModelResultData'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/manuscripts/{manuscriptId}/revisions/{revisionId}:
+    delete:
+      summary: deletes the manuscript revision with the given ids (if the logged-in user is owner)
+      operationId: deleteManuscriptRevision
+      parameters:
+        - name: manuscriptId
+          in: path
+          schema:
+            type: string
+            format: uuid
+          required: true
+        - name: revisionId
+          in: path
+          schema:
+            type: string
+            format: uuid
+          required: true
+      responses:
+        204:
+          description: No content
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        402:
+          description: 402 PaymentRequired (Subscription Required to access this content)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/admin/manuscripts/{manuscriptId}/revisions/{revisionId}:
+    delete:
+      summary: deletes the manuscript with the given id (dangerous - does not check ownership)
+      operationId: adminDeleteManuscriptRevision
+      parameters:
+        - name: manuscriptId
+          in: path
+          schema:
+            type: string
+            format: uuid
+          required: true
+        - name: revisionId
+          in: path
+          schema:
+            type: string
+            format: uuid
+          required: true
+        - name: reason
+          description: a reason that will be visible to the user in their event history
+          in: query
+          schema:
+            type: string
+            minLength: 3
+            maxLength: 64
+          required: true
+        - name: additionalReason
+          description: an additional reason that will only be visible to admins
+          in: query
+          schema:
+            type: string
+            minLength: 3
+            maxLength: 80
+          required: false
+      responses:
+        204:
+          description: No content
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/manuscripts/{manuscriptId}/revisions/{revisionId}/title:
+    patch:
+      summary: Change the title of a manuscript revision
+      operationId: changeManuscriptRevisionTitle
+      parameters:
+        - name: manuscriptId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: revisionId
+          in: path
+          schema:
+            type: string
+            format: uuid
+          required: true
+        - name: newTitle
+          in: query
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 64
+      responses:
+        204:
+          description: No content
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        402:
+          description: 402 PaymentRequired (Subscription Required to access this content)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/admin/manuscripts/{manuscriptId}/revisions/{revisionId}/title:
+    patch:
+      summary: Change the title of a manuscript revision
+      operationId: adminChangeManuscriptRevisionTitle
+      parameters:
+        - name: manuscriptId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: revisionId
+          in: path
+          schema:
+            type: string
+            format: uuid
+          required: true
+        - name: newTitle
+          in: query
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 64
+        - name: reason
+          description: a reason that will be visible to the user in their event history
+          in: query
+          schema:
+            type: string
+            minLength: 3
+            maxLength: 64
+          required: true
+        - name: additionalReason
+          description: an additional reason that will only be visible to admins
+          in: query
+          schema:
+            type: string
+            minLength: 3
+            maxLength: 80
+          required: false
+      responses:
+        204:
+          description: No content
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+
+  /api/recommendations/{metricId}/{genre}/{audience}/{metricValue}:
+    get:
+      summary: gets a recommendation
+      operationId: getRecommendation
+      parameters:
+        - name: metricId
+          in: path
+          schema:
+            type: integer
+          required: true
+        - name: genre
+          in: path
+          schema:
+            type: string
+          required: true
+        - name: audience
+          in: path
+          schema:
+            type: string
+          required: true
+        - name: metricValue
+          in: path
+          schema:
+            type: number
+            format: float
+          required: true
+      responses:
+        200:
+          description: Recommendation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recommendation'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/tips/:
+    get:
+      summary: gets tips
+      operationId: getTips
+      parameters:
+        - name: report
+          in: query
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Tips
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tip'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/characteristics/:
+    get:
+      summary: gets Characteristic
+      operationId: getCharacteristic
+      parameters:
+        - name: report
+          in: query
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Characteristic
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Characteristic'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/articles/:
+    get:
+      summary: gets Articles
+      operationId: getArticles
+      parameters:
+        - name: report
+          in: query
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Tips
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Article'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/archetypes/:
+    get:
+      summary: gets archetypes
+      operationId: getArchetypes
+      responses:
+        200:
+          description: archetypes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Archetype'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/archetypeIndexes/:
+    get:
+      summary: gets archetypeIndexes
+      operationId: getArchetypeIndexes
+      responses:
+        200:
+          description: archetypeindexes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ArchetypeIndex'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/globalScores/:
+    get:
+      summary: gets globalscores
+      operationId: getGlobalscores
+      responses:
+        200:
+          description: globalscores
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GlobalScore'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/reportIndexes/:
+    get:
+      summary: gets ReportIndexes
+      operationId: getReportIndexes
+      responses:
+        200:
+          description: ReportIndexes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReportIndex'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/infos/:
+    get:
+      operationId: getInfos
+      responses:
+        200:
+          description: ReportIndexes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Info'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/whatis/:
+    get:
+      operationId: getwhatIs
+      responses:
+        200:
+          description: ReportIndexes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WhatIs'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/dashboard/:
+    get:
+      operationId: getDashboard
+      responses:
+        200:
+          description: ReportIndexes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Dashboard'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/texts/{language}/:
+    get:
+      summary: returns texts
+      operationId: getTexts
+      parameters:
+        - name: language
+          in: path
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 2
+          required: true
+        - name: names
+          in: query
+          schema:
+            type: string
+          required: false
+          description: comma-separated list of texts to return (if omitted returns all texts)
+      responses:
+        200:
+          description: Texts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Text'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/admin/texts/{language}/{name}:
+    post:
+      summary: saves a text (create if doesn't exist)
+      operationId: saveText
+      parameters:
+        - name: language
+          in: path
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 2
+          required: true
+        - name: name
+          in: path
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - text
+              properties:
+                text:
+                  type: string
+      responses:
+        204:
+          description: No content
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: deletes all settings for the logged-in user
+      operationId: deleteText
+      parameters:
+        - name: language
+          in: path
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 2
+          required: true
+        - name: name
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        204:
+          description: No content
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+
+  /api/author/settings/:
+    get:
+      summary: returns currently logged-in users settings
+      operationId: getSettings
+      responses:
+        200:
+          description: Settings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuthorSetting'
+    post:
+      summary: saves settings logged-in user
+      operationId: saveSettings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/AuthorSetting'
+      responses:
+        204:
+          description: No content
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: deletes all settings for the logged-in user
+      operationId: deleteSettings
+      responses:
+        204:
+          description: No content
+
+  /api/author/settings/{name}:
+    delete:
+      summary: deletes a specific setting for the logged-in user
+      operationId: deleteSetting
+      parameters:
+        - name: name
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        204:
+          description: No content
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+
+  /api/payment/products/:
+    get:
+      summary: returns payment products
+      operationId: getEligiblePaymentProducts
+      responses:
+        200:
+          description: Page of PaymentProduct
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PaymentProduct'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/payment/purchase/:
+    post:
+      summary: creates a purchase
+      operationId: createPurchase
+      parameters:
+        - name: productId
+          in: query
+          schema:
+            type: string
+            format: uuid
+          required: true
+      responses:
+        200:
+          description: payment gateway url
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseInitiationResult'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        409:
+          description: 409 Conflict (user already has subscription)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        503:
+          description: 503 Service Unavailable (user is not DEVELOPER)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      summary: returns a purchase
+      operationId: getPurchase
+      parameters:
+        - name: clientReferenceId
+          in: query
+          schema:
+            type: string
+            format: uuid
+          required: true
+      responses:
+        200:
+          description: Purchase
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Purchase'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+
+  /api/admin/payment/products/:
+    get:
+      summary: returns payment products
+      operationId: getAdminPaymentProducts
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 0
+          required: false
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            default: 10
+          required: false
+      responses:
+        200:
+          description: Page of PaymentProduct
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfAdminPaymentProduct'
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: savePaymentProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminPaymentProduct'
+      responses:
+        201:
+          description: Created
+        400:
+          description: 400 BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+
+
+components:
+  schemas:
+
+    AuthorStatus:
+      description: Information about the logged-in user.
+      type: object
+      required:
+        - id
+        - role
+        - permissions
+        - complimentaryUploadsRemaining
+        - purchasedUploadsRemaining
+        - subscriptionUploadsRemaining
+        - accessLevel
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+        nickname:
+          type: string
+        username:
+          type: string
+        role:
+          $ref: '#/components/schemas/AuthorRole'
+        permissions:
+          type: array
+          items:
+            type: string
+        complimentaryUploadsRemaining:
+          type: integer
+        purchasedUploadsRemaining:
+          type: integer
+        subscriptionUploadsRemaining:
+          type: integer
+        accessLevel:
+          $ref: '#/components/schemas/AccessLevel'
+
+    AccessLevel:
+      type: string
+      enum:
+        - NONE
+        - STANDARD
+        - PREMIUM
+
+    AuthorListItem:
+      description: basic author information with only enough to display in a list and link to author specific pages
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+
+    HistoryEvent:
+      description: history event
+      type: object
+      required:
+        - eventTime
+        - eventType
+        - eventSubType
+        - message
+      properties:
+        eventTime:
+          type: string
+          format: date-time
+        eventType:
+          $ref: '#/components/schemas/HistoryEventType'
+        eventSubType:
+          type: string
+        message:
+          type: string
+
+    DetailedHistoryEvent:
+      description: history event that includes additional details that only admins should be able to see.
+      type: object
+      required:
+        - eventTime
+        - eventType
+        - eventSubType
+        - message
+      properties:
+        eventTime:
+          type: string
+          format: date-time
+        eventType:
+          $ref: '#/components/schemas/HistoryEventType'
+        eventSubType:
+          type: string
+        message:
+          type: string
+        details:
+          description: Additional details that only admins should be able to see.
+          $ref: '#/components/schemas/AnyValue'
+
+    HistoryEventType:
+      type: string
+      enum:
+        - AUTHOR
+        - PURCHASE
+        - SUBSCRIPTION
+        - INVOICE
+        - MANUSCRIPT
+
+    Author:
+      description: information about an author
+      type: object
+      required:
+        - id
+        - role
+        - complimentaryUploadsRemaining
+        - purchasedUploadsRemaining
+        - subscriptionUploadsRemaining
+        - created
+        - updated
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+        nickname:
+          type: string
+        username:
+          type: string
+        role:
+          $ref: '#/components/schemas/AuthorRole'
+        complimentaryUploadsRemaining:
+          type: integer
+        purchasedUploadsRemaining:
+          type: integer
+        subscriptionUploadsRemaining:
+          type: integer
+        created:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+
+    AuthorRole:
+      type: string
+      enum:
+        - NEW
+        - USER
+        - TESTER
+        - ADMIN
+        - DEVELOPER
+        - BANNED
+
+    CategoryInfo:
+      description: List the supported genres and audiences
+      type: object
+      required:
+        - genres
+        - audiences
+      properties:
+        genres:
+          type: array
+          items:
+            type: string
+        audiences:
+          type: array
+          items:
+            type: string
+
+    Manuscript:
+      description: Information about a manuscript
+      type: object
+      required:
+        - id
+        - author
+        - title
+        - audience
+        - genre
+        - progress
+        - created
+        - latestRevision
+      properties:
+        id:
+          type: string
+          format: uuid
+        author:
+          $ref: '#/components/schemas/AuthorListItem'
+        title:
+          type: string
+        audience:
+          type: string
+        genre:
+          type: string
+        progress:
+          description: Progress from the latest revision
+          $ref: '#/components/schemas/ManuscriptProgress'
+        created:
+          type: string
+          format: date-time
+        latestRevision:
+          type: string
+          format: date-time
+
+    ManuscriptRevision:
+      description: Information about a manuscript
+      type: object
+      required:
+        - id
+        - title
+        - audience
+        - genre
+        - progress
+        - modelVersion
+        - created
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        audience:
+          type: string
+        genre:
+          type: string
+        progress:
+          $ref: '#/components/schemas/ManuscriptProgress'
+        modelVersion:
+          type: integer
+        created:
+          type: string
+          format: date-time
+
+    ManuscriptProgress:
+      description: Information about the status and progress of analyzing a manuscript
+      type: object
+      required:
+        - status
+        - modelsDone
+        - modelsTotal
+        - errors
+      properties:
+        status:
+          $ref: '#/components/schemas/ManuscriptStatus'
+        modelsDone:
+          type: integer
+        modelsTotal:
+          type: integer
+        errors:
+          type: integer
+        positionInQueue:
+          type: integer
+          description: when non-null this is the number of manuscripts before this one in queue on the assigned server
+        globalScore:
+          type: number
+          format: float
+        userScore:
+          type: number
+          format: float
+
+    ManuscriptStatus:
+      type: string
+      description: |
+        Overall status:
+          * `PENDING` - Waiting to be processed
+          * `PROCESSING` - Being processed
+          * `DONE` - Done processing
+      enum:
+        - PENDING
+        - PROCESSING
+        - DONE
+
+    ManuscriptUploadResponse:
+      description: Status for a manuscript upload
+      type: object
+      required:
+        - manuscriptId
+        - revisionId
+      properties:
+        manuscriptId:
+          type: string
+          format: uuid
+        revisionId:
+          type: string
+          format: uuid
+        statusMessage:
+          type: string
+
+    PageOfHistoryEvent:
+      type: object
+      required:
+        - page
+        - pageSize
+        - totalPages
+        - totalElements
+        - content
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalPages:
+          type: integer
+        totalElements:
+          type: integer
+          format: int64
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/HistoryEvent'
+
+    PageOfDetailedHistoryEvent:
+      type: object
+      required:
+        - page
+        - pageSize
+        - totalPages
+        - totalElements
+        - content
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalPages:
+          type: integer
+        totalElements:
+          type: integer
+          format: int64
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/DetailedHistoryEvent'
+
+    PageOfAuthor:
+      type: object
+      required:
+        - page
+        - pageSize
+        - totalPages
+        - totalElements
+        - content
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalPages:
+          type: integer
+        totalElements:
+          type: integer
+          format: int64
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Author'
+
+    PageOfManuscript:
+      type: object
+      required:
+        - page
+        - pageSize
+        - totalPages
+        - totalElements
+        - content
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalPages:
+          type: integer
+        totalElements:
+          type: integer
+          format: int64
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Manuscript'
+
+    PageOfManuscriptRevision:
+      type: object
+      required:
+        - manuscriptTitle
+        - page
+        - pageSize
+        - totalPages
+        - totalElements
+        - content
+      properties:
+        manuscriptTitle:
+          type: string
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalPages:
+          type: integer
+        totalElements:
+          type: integer
+          format: int64
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManuscriptRevision'
+
+    SimilarBookMetadata:
+      type: object
+      required:
+        - isbn
+        - title
+        - genre
+        - audience
+      properties:
+        isbn:
+          type: integer
+          format: int64
+        title:
+          type: string
+        genre:
+          type: string
+        audience:
+          type: string
+
+
+    ModelResultData:
+      type: object
+      required:
+        - model
+        - status
+      properties:
+        model:
+          description: Name of the model
+          type: string
+        section:
+          description: Name of the section within the model
+          type: string
+        status:
+          type: string
+          enum:
+            - PENDING
+            - PROCESSING
+            - DONE
+            - ERROR
+        content:
+          description: Data in whatever format the AI gives it
+          $ref: '#/components/schemas/AnyValue'
+
+
+    AnyValue:
+      description: Lots of unstructured data
+
+
+    CategoryInfo2:
+      type: object
+      required:
+        - metrics
+        - audiences
+        - genres
+        - audienceMatch
+        - genreMatch
+      properties:
+        metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/Metric'
+        audiences:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdName'
+        genres:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdName'
+        audienceMatch:
+          $ref: '#/components/schemas/MatchText'
+        genreMatch:
+          $ref: '#/components/schemas/MatchText'
+
+    Metric:
+      type: object
+      required:
+        - id
+        - name
+        - uniqueName
+        - reportIndex
+        - modelName
+        - variableName
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        uniqueName:
+          type: string
+        reportIndex:
+          type: integer
+        modelName:
+          type: string
+        variableName:
+          type: string
+
+    IdName:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+
+    MatchText:
+      type: object
+      required:
+        - match
+        - noMatch
+      properties:
+        match:
+          type: string
+        noMatch:
+          type: string
+
+
+    Recommendation:
+      type: object
+      required:
+        - rangeLow
+        - rangeHigh
+        - message
+      properties:
+        rangeLow:
+          type: number
+          format: float
+        rangeHigh:
+          type: number
+          format: float
+        message:
+          type: string
+        RAG:
+          type: string
+        RAGText:
+          type: string
+        RAGLevel:
+          type: string
+
+    Tip:
+      type: object
+      required:
+        - id
+        - report
+        - report_name
+        - text
+      properties:
+        id:
+          type: integer
+        report:
+          type: integer
+        report_name:
+          type: string
+        text:
+          type: string
+
+    WhatIs:
+      type: object
+      required:
+        - id
+        - report
+        - report_name
+        - head
+        - text
+      properties:
+        id:
+          type: integer
+        report:
+          type: integer
+        report_name:
+          type: string
+        head:
+          type: string
+        text:
+          type: string
+
+    Characteristic:
+      type: object
+      required:
+        - id
+        - report
+        - report_name
+        - metric
+        - text
+      properties:
+        id:
+          type: integer
+        report:
+          type: integer
+        report_name:
+          type: string
+        metric:
+          type: string
+        text:
+          type: string
+
+    Article:
+      type: object
+      required:
+        - id
+        - report
+        - report_name
+        - headline
+        - text
+        - link
+      properties:
+        id:
+          type: integer
+        report:
+          type: integer
+        report_name:
+          type: string
+        headline:
+          type: string
+        text:
+          type: string
+        link:
+          type: string
+
+    ArchetypeIndex:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+
+    Archetype:
+      type: object
+      required:
+        - id
+        - type
+        - typeName
+        - RAGLevel
+        - text
+      properties:
+        id:
+          type: integer
+        type:
+          type: integer
+        typeName:
+          type: string
+        RAGLevel:
+          type: string
+        text:
+          type: string
+
+    GlobalScore:
+      type: object
+      required:
+        - id
+        - type
+        - typeName
+        - text
+      properties:
+        id:
+          type: integer
+        type:
+          type: integer
+        typeName:
+          type: string
+        text:
+          type: string
+
+    ReportIndex:
+      type: object
+      required:
+        - id
+        - name
+        - sortIndex
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        sortIndex:
+          type: integer
+
+    Info:
+      type: object
+      required:
+        - id
+        - report
+        - reportName
+        - label
+        - text
+      properties:
+        id:
+          type: integer
+        report:
+          type: integer
+        reportName:
+          type: string
+        label:
+          type: string
+        text:
+          type: string
+
+    Dashboard:
+      type: object
+      required:
+        - id
+        - element
+        - text
+      properties:
+        id:
+          type: integer
+        element:
+          type: string
+        text:
+          type: string
+
+    AuthorSetting:
+      type: object
+      required:
+        - name
+        - value
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+        value:
+          type: string
+          minLength: 1
+          maxLength: 64
+
+    Text:
+      type: object
+      required:
+        - name
+        - language
+        - value
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+        language:
+          type: string
+          minLength: 2
+          maxLength: 2
+        value:
+          type: string
+          minLength: 1
+
+    EngineInfo:
+      type: object
+      required:
+        - id
+        - uri
+        - status
+      properties:
+        id:
+          type: string
+          format: uuid
+        uri:
+          type: string
+        pendingQueue:
+          type: integer
+        dispatchedQueue:
+          type: integer
+        errors:
+          type: integer
+        timeoutErrors:
+          type: integer
+        modelVersion:
+          type: integer
+        status:
+          type: string
+          enum:
+            - INITIAL
+            - ALIVE
+            - DEAD
+        aliveSince:
+          type: string
+          format: date-time
+        deadSince:
+          type: string
+          format: date-time
+
+    PageOfPaymentProduct:
+      type: object
+      required:
+        - page
+        - pageSize
+        - totalPages
+        - totalElements
+        - content
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalPages:
+          type: integer
+        totalElements:
+          type: integer
+          format: int64
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentProduct'
+
+    PaymentProduct:
+      type: object
+      required:
+        - name
+        - description
+        - productType
+        - price
+        - currency
+        - uploads
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        productType:
+          $ref: '#/components/schemas/PaymentProductType'
+        price:
+          description:
+            Price in the smallest unit of the currency (øre for DKK).
+            If SUBSCRIPTION this is per billing interval.
+          type: integer
+        currency:
+          type: string
+        uploads:
+          description: if SUBSCRIPTION this is per month
+          type: integer
+        subscriptionLevel:
+          description: must be null if PURCHASE and must be non-null if SUBSCRIPTION
+          $ref: '#/components/schemas/SubscriptionLevel'
+        billingInterval:
+          description: must be null if PURCHASE and must be non-null if SUBSCRIPTION
+          $ref: '#/components/schemas/BillingInterval'
+        bullets:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentProductBulletPoint'
+
+    PaymentProductBulletPoint:
+      type: object
+      required:
+        - text
+      properties:
+        icon:
+          type: string
+        text:
+          type: string
+
+    PaymentProductType:
+      type: string
+      enum:
+        - PURCHASE
+        - SUBSCRIPTION
+
+    SubscriptionLevel:
+      type: string
+      enum:
+        - STANDARD
+        - PREMIUM
+
+    BillingInterval:
+      description: mandatory for SUBSCRIPTION, not allowed for ONE_TIME
+      type: string
+      enum:
+        - MONTHLY
+        - QUARTERLY
+
+    PageOfAdminPaymentProduct:
+      type: object
+      required:
+        - page
+        - pageSize
+        - totalPages
+        - totalElements
+        - content
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalPages:
+          type: integer
+        totalElements:
+          type: integer
+          format: int64
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdminPaymentProduct'
+
+    AdminPaymentProduct:
+      allOf:
+        - $ref: '#/components/schemas/PaymentProduct'
+        - type: object
+          required:
+            - code
+            - active
+          properties:
+            code:
+              description: a unique code that ensures products are not duplicated
+              type: string
+            active:
+              type: boolean
+
+    PurchaseInitiationResult:
+      type: object
+      required:
+        - paymentUrl
+      properties:
+        paymentUrl:
+          type: string
+
+
+    PageOfPurchase:
+      type: object
+      required:
+        - page
+        - pageSize
+        - totalPages
+        - totalElements
+        - content
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalPages:
+          type: integer
+        totalElements:
+          type: integer
+          format: int64
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Purchase'
+
+    Purchase:
+      type: object
+      required:
+        - product
+        - status
+        - created
+      properties:
+        product:
+          $ref: '#/components/schemas/PaymentProduct'
+        price:
+          description:
+            Price in the smallest unit of the currency (øre for DKK).
+            If SUBSCRIPTION this is per billing interval.
+          type: integer
+        currency:
+          type: string
+        status:
+          $ref: '#/components/schemas/PurchaseStatus'
+        created:
+          type: string
+          format: date-time
+
+    PurchaseStatus:
+      type: string
+      enum:
+        - PENDING
+        - COMPLETED
+        - CANCELLED
+        - SESSION_EXPIRED
+
+
+
+
+    PageOfSubscription:
+      type: object
+      required:
+        - page
+        - pageSize
+        - totalPages
+        - totalElements
+        - content
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalPages:
+          type: integer
+        totalElements:
+          type: integer
+          format: int64
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Subscription'
+
+    Subscription:
+      type: object
+      required:
+        - product
+        - status
+        - level
+      properties:
+        product:
+          $ref: '#/components/schemas/PaymentProduct'
+        status:
+          $ref: '#/components/schemas/SubscriptionStatus'
+        level:
+          $ref: '#/components/schemas/SubscriptionLevel'
+        activated:
+          type: string
+          format: date-time
+        cancelled:
+          type: string
+          format: date-time
+        subscriptionStart:
+          type: string
+          format: date-time
+        subscriptionEnd:
+          type: string
+          format: date-time
+        currentPeriodStart:
+          type: string
+          format: date-time
+        currentPeriodEnd:
+          type: string
+          format: date-time
+
+    SubscriptionStatus:
+      description: |
+        Overall status:
+          * `INACTIVE` - Initial state until subscription has been payed
+          * `ACTIVE` - Subscription is active
+          * `CANCELLED` - Subscription has been cancelled, but is still active until it expires
+          * `EXPIRED` - Subscription has expired and is no longer active
+      type: string
+      enum:
+        - INACTIVE
+        - ACTIVE
+        - CANCELLED
+        - EXPIRED
+
+    PageOfInvoice:
+      type: object
+      required:
+        - page
+        - pageSize
+        - totalPages
+        - totalElements
+        - content
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalPages:
+          type: integer
+        totalElements:
+          type: integer
+          format: int64
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Invoice'
+
+    Invoice:
+      type: object
+      required:
+        - id
+        - productName
+        - type
+        - amountPaid
+        - currency
+        - created
+      properties:
+        id:
+          type: string
+          format: uuid
+        productName:
+          type: string
+        type:
+          $ref: '#/components/schemas/InvoiceType'
+        amountPaid:
+          type: integer
+        amountDue:
+          type: integer
+        currency:
+          type: string
+        periodStart:
+          type: string
+          format: date-time
+        periodEnd:
+          type: string
+          format: date-time
+        hostedInvoiceUrl:
+          type: string
+        pdfInvoiceUrl:
+          type: string
+        created:
+          type: string
+          format: date-time
+
+    InvoiceType:
+      type: string
+      enum:
+        - PAYMENT
+        - PAYMENT_FAILURE
+
+
+    Error:
+      type: object
+      required:
+        - type
+        - message
+      properties:
+        type:
+          type: string
+        message:
+          type: string

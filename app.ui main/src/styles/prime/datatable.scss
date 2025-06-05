@@ -1,0 +1,255 @@
+$padding: 0.25rem 0.5rem;
+
+.p-datatable {
+    .p-paginator-top {
+        border-width: 0 0 1px 0;
+        border-radius: 0;
+    }
+    .p-paginator-bottom {
+        border-width: 0 0 1px 0;
+        border-radius: 0;
+    }
+}
+.p-datatable .p-datatable-header {
+    background: var(--surface-header);
+    color: var(--text-color-header);
+    border-color: var(--surface-border);
+    border-style: solid;
+    border-width: 1px 0 1px 0;
+    padding: var(--content-padding);
+    font-weight: 700;
+}
+.p-datatable .p-datatable-footer {
+    background: var(--surface-footer);
+    color: var(--text-color-footer);
+    border-color: var(--surface-border);
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    padding: var(--content-padding);
+    font-weight: 700;
+}
+.p-datatable .p-datatable-thead > tr > th {
+    text-align: left;
+    padding: $padding;
+    border-color: var(--surface-border);
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    font-weight: 700;
+    color: var(--text-color-header);
+    background: var(--table-header);
+    transition: box-shadow 0.2s;
+}
+.p-datatable .p-datatable-tfoot > tr > td {
+    text-align: left;
+    padding: 1rem 1rem;
+    border-color: var(--surface-border);
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    font-weight: 700;
+    color: var(--text-color-footer);
+    background: var(--surface-footer);
+}
+.p-datatable .p-sortable-column .p-sortable-column-icon {
+    color: var(--text-color-header);
+    margin-left: var(--inline-spacing);
+}
+.p-datatable .p-sortable-column .p-sortable-column-badge {
+    border-radius: 50%;
+    height: 1.143rem;
+    min-width: 1.143rem;
+    line-height: 1.143rem;
+    color: var(--primary-color);
+    background: var(--highlight-background);
+    margin-left: var(--inline-spacing);
+}
+.p-datatable .p-sortable-column:not(.p-highlight):hover {
+    background: var(--hover-background);
+    color: var(--hover-color);
+}
+.p-datatable .p-sortable-column:not(.p-highlight):hover .p-sortable-column-icon {
+    color: var(--hover-color);
+}
+.p-datatable .p-sortable-column.p-highlight {
+    background: var(--highlight-background);
+    color: var(--highlight-color);
+}
+.p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
+    color: var(--primary-color);
+}
+.p-datatable .p-sortable-column.p-highlight:hover {
+    background: var(--highlight-background);
+    color: var(--primary-color);
+}
+.p-datatable .p-sortable-column.p-highlight:hover .p-sortable-column-icon {
+    color: var(--primary-color);
+}
+.p-datatable .p-sortable-column:focus {
+    box-shadow: inset 0 0 0 0.15rem var(--focus-outline);
+    outline: 0 none;
+}
+.p-datatable .p-datatable-tbody > tr {
+    background: var(--form-background);
+    color: var(--text-color);
+    transition: box-shadow 0.2s;
+}
+// This part of the code is not ready yet.
+//.p-datatable .p-datatable-tbody > tr {
+//    &:nth-child(even) {
+//        background-color: var(--surface-ground);
+//
+//        &:hover {
+//            background-color: var(--surface-hover)
+//        }
+//    }
+//}
+
+.p-datatable .p-datatable-tbody > tr > td {
+    text-align: left;
+    border-color: var(--surface-border);
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    padding: $padding;
+}
+
+.p-datatable .p-datatable-tbody > tr > td.documentFile {
+    font-family: "Courier New", "Courier", "monospace" !important;
+}
+
+.p-datatable .p-datatable-tbody > tr > td .p-row-toggler,
+.p-datatable .p-datatable-tbody > tr > td .p-row-editor-init,
+.p-datatable .p-datatable-tbody > tr > td .p-row-editor-save,
+.p-datatable .p-datatable-tbody > tr > td .p-row-editor-cancel {
+    width: 2rem;
+    height: 2rem;
+    color: var(--text-color-secondary);
+    border: 0 none;
+    background: transparent;
+    border-radius: 50%;
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.p-datatable .p-datatable-tbody > tr > td .p-row-toggler:enabled:hover,
+.p-datatable .p-datatable-tbody > tr > td .p-row-editor-init:enabled:hover,
+.p-datatable .p-datatable-tbody > tr > td .p-row-editor-save:enabled:hover,
+.p-datatable .p-datatable-tbody > tr > td .p-row-editor-cancel:enabled:hover {
+    color: var(--hover-color);
+    border-color: transparent;
+    background: var(--hover-background);
+}
+.p-datatable .p-datatable-tbody > tr > td .p-row-toggler:focus,
+.p-datatable .p-datatable-tbody > tr > td .p-row-editor-init:focus,
+.p-datatable .p-datatable-tbody > tr > td .p-row-editor-save:focus,
+.p-datatable .p-datatable-tbody > tr > td .p-row-editor-cancel:focus {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: var(--focus-ring);
+}
+.p-datatable .p-datatable-tbody > tr > td .p-row-editor-save {
+    margin-right: var(--inline-spacing);
+}
+.p-datatable .p-datatable-tbody > tr:focus {
+    outline: 0.15rem solid var(--focus-color);
+    outline-offset: 0.15rem;
+}
+.p-datatable .p-datatable-tbody > tr.p-highlight {
+    background: var(--highlight-background);
+    color: var(--primary-color);
+}
+.p-datatable .p-datatable-tbody > tr.p-datatable-dragpoint-top > td {
+    box-shadow: inset 0 2px 0 0 var(--highlight-background);
+}
+.p-datatable .p-datatable-tbody > tr.p-datatable-dragpoint-bottom > td {
+    box-shadow: inset 0 -2px 0 0 var(--highlight-background);
+}
+.p-datatable.p-datatable-hoverable-rows .p-datatable-tbody > tr:not(.p-highlight):hover {
+    background: var(--highlight-background);
+    color: var(--text-color);
+}
+.p-datatable .p-column-resizer-helper {
+    background: var(--primary-color);
+}
+.p-datatable .p-datatable-scrollable-header {
+    background: var(--surface-header);
+}
+.p-datatable .p-datatable-scrollable-footer {
+    background: var(--surface-footer);
+}
+.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-thead{
+    background-color: var(--surface-header);
+}
+.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-tfoot {
+    background-color: var(--surface-footer);
+}
+.p-datatable .p-datatable-loading-icon {
+    font-size: 2rem;
+}
+.p-datatable.p-datatable-gridlines .p-datatable-header {
+    border-width: 1px 1px 0 1px;
+}
+.p-datatable.p-datatable-gridlines .p-datatable-footer {
+    border-width: 0 1px 1px 1px;
+}
+.p-datatable.p-datatable-gridlines .p-paginator-top {
+    border-width: 0 1px 0 1px;
+}
+.p-datatable.p-datatable-gridlines .p-paginator-bottom {
+    border-width: 0 1px 1px 1px;
+}
+.p-datatable.p-datatable-gridlines .p-datatable-thead > tr > th {
+    border-width: 1px 1px 1px 1px;
+}
+.p-datatable.p-datatable-gridlines .p-datatable-tbody > tr > td {
+    border-width: 1px;
+}
+.p-datatable.p-datatable-gridlines .p-datatable-tfoot > tr > td {
+    border-width: 1px;
+}
+.p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even) {
+    background: var(--table-alternate-background);
+}
+.p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even).p-highlight {
+    background: var(--highlight-background);
+    color: var(--highlight-color);
+}
+.p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even).p-highlight .p-row-toggler {
+    color: var(--highlight-color);
+}
+.p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even).p-highlight .p-row-toggler:hover {
+    color: var(--highlight-color);
+}
+.p-datatable.p-datatable-sm .p-datatable-header {
+    padding: var(--inline-spacing) var(--inline-spacing);
+}
+.p-datatable.p-datatable-sm .p-datatable-thead > tr > th {
+    padding: var(--inline-spacing) var(--inline-spacing);
+}
+.p-datatable.p-datatable-sm .p-datatable-tbody > tr > td {
+    padding: var(--inline-spacing) var(--inline-spacing);
+}
+.p-datatable.p-datatable-sm .p-datatable-tfoot > tr > td {
+    padding: var(--inline-spacing) var(--inline-spacing);
+}
+.p-datatable.p-datatable-sm .p-datatable-footer {
+    padding: var(--inline-spacing) var(--inline-spacing);
+}
+.p-datatable.p-datatable-lg .p-datatable-header {
+    padding: var(--content-padding) var(--content-padding);
+}
+.p-datatable.p-datatable-lg .p-datatable-thead > tr > th {
+    padding: var(--content-padding) var(--content-padding);
+}
+.p-datatable.p-datatable-lg .p-datatable-tbody > tr > td {
+    padding: var(--content-padding) var(--content-padding);
+}
+.p-datatable.p-datatable-lg .p-datatable-tfoot > tr > td {
+    padding: var(--content-padding) var(--content-padding);
+}
+.p-datatable.p-datatable-lg .p-datatable-footer {
+    padding: var(--content-padding) var(--content-padding);
+}
+
+.p-datatable .p-datatable-tbody > tr.p-datatable-dragpoint-top > td {
+    box-shadow: inset 0 2px 0 0 var(--primary-color);
+}
+.p-datatable .p-datatable-tbody > tr.p-datatable-dragpoint-bottom > td {
+    box-shadow: inset 0 -2px 0 0 var(--primary-color);
+}

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="600"
+   height="300"
+   viewBox="0 0 158.75 79.375"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="arketype.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="256.3262"
+     inkscape:cy="167.5843"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="1072"
+     inkscape:window-y="1072"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2774"
+       originx="0"
+       originy="0"
+       spacingx="13.229167"
+       spacingy="13.229167"
+       empspacing="4" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="ZeroLine"
+     sodipodi:insensitive="true">
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:0.264583;stroke-dasharray:0.793754, 0.793754;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 0,39.6875 H 158.75"
+       id="path1683"
+       inkscape:label="ZeroLine"
+       sodipodi:insensitive="true" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Rags_To_Riches">
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:0.53048958;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="M -0.02795452,39.659302 158.79519,13.223448"
+       id="path5321" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Tradegy">
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:0.26458333;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="M -0.04016487,39.707951 159.05821,66.244808"
+       id="path5378" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="Icarus">
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:0.26458333;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="M -0.0450449,39.378659 79.405111,13.198473 158.79138,39.741088"
+       id="path5867" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer6"
+     inkscape:label="Man_In_A_Hole">
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:0.26458333;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 0,39.679472 79.374909,66.147531 158.74982,39.684793"
+       id="path5885" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer7"
+     inkscape:label="Cindarella">
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:0.26458333;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 0,39.690116 52.917494,13.227378 105.84076,39.685581 158.74982,13.23536"
+       id="path5905" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer8"
+     inkscape:label="Odipus">
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:0.26458333;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 0.00133045,39.690116 52.916666,66.147899 105.83127,39.6875 158.75935,66.147536"
+       id="path5908" />
+  </g>
+  <g
+     inkscape:label="BorderLines"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:none;stroke:#e4b200;stroke-width:0.529167;stroke-dasharray:none;stroke-opacity:1"
+       d="M 0.26458335,79.375 V 0"
+       id="path236"
+       inkscape:label="LeftLine"
+       sodipodi:insensitive="true" />
+    <path
+       style="fill:none;stroke:#e4b200;stroke-width:0.529167;stroke-dasharray:none;stroke-opacity:1"
+       d="M 0,79.110417 H 158.75"
+       id="path1680"
+       inkscape:label="BottomLine"
+       sodipodi:insensitive="true" />
+    <path
+       style="fill:none;stroke:#e4b200;stroke-width:0.529167;stroke-dasharray:none;stroke-opacity:1"
+       d="M 158.48542,79.375 V 0"
+       id="path250"
+       inkscape:label="RightLine"
+       sodipodi:insensitive="true" />
+  </g>
+</svg>

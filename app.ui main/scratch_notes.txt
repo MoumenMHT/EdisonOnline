@@ -1,0 +1,71 @@
+﻿de fem udvalgte værdier i Sim.Books til spindelvævet
+
+- User deffined genre score
+Model: GenreClassification
+section: global
+data: highest score. - Global analyed
+- bruger angivet genre op mod den samme genre fra sim books.
+label: Genre
+
+- global_score
+model: GlobalUser
+section: global
+data: content.score
+label: Global score
+
+- Value of best_fitting_topic
+model: SemanticFields
+section: global
+data: highest score
+label: Målgruppe
+- topic name op mod den samme topic fra sim books.
+
+- Value of highest ArkeType
+model: Archetypes
+section: global
+data: highest score
+label: Arketype
+
+- LIX
+model: Legibility
+section: global
+data: content.LIX
+
+
+class: "Biografier" -> "Biografier"
+class: "Romantik" -> "Romantik"
+class: "Fagbog" -> "Fagbog"
+class: "Fantasy/Science-Fiction" -> "Fantasy/Science-Fiction"
+class: "Historiske romaner" -> "Historiske romaner"
+class: "Klassisk skønlitteratur" -> "Klassisk skoenlitteratur"
+class: "Krimi" -> "Krimi"
+class: "Spænding" -> "Spaending"
+class: "Børn" -> "Boern"
+class: "Ungdom" -> "Ungdom"
+
+/*****************************/
+Top arketype bøger.
+9788711392331	Privat skov	Tragedy
+9788711341414	Stillidsen	Cinderella
+9788711920053	Hosekræmmeren og andre noveller	Man in a hole
+9788702277425	Gilgamesh	Icarus
+9788763854122	Glimmerbøsserne	Rags to riches
+9788702098877	Delvecchios dom	Oedipus
+
+
+/*******************************/
+//Klichéer
+<svg xmlns="http://www.w3.org/2000/svg" width="27" height="30" viewBox="0 0 21 24"
+     fill="none">
+    <path
+        d="M0 0V10.1607H7.70221V0H0ZM10.2696 0V3.38688H20.5392V0H10.2696ZM10.2696 6.77377V10.1607H17.9718V6.77377H10.2696ZM0 13.5475V23.7082H7.70221V13.5475H0ZM10.2696 13.5475V16.9344H20.5392V13.5475H10.2696ZM10.2696 20.3213V23.7082H17.9718V20.3213H10.2696Z"
+        fill="#E4B200"/>
+</svg>
+
+// Dialog
+<svg xmlns="http://www.w3.org/2000/svg" width="27" height="30" viewBox="0 0 27 30"
+     fill="none">
+    <path
+        d="M18.2457 0C16.5539 0 15.0942 1.30162 14.1985 3.27263C15.6913 5.28084 16.587 8.03283 16.587 11.1939C16.587 12.2724 16.4875 13.2393 16.2885 14.2062C16.9188 14.6153 17.5491 14.9128 18.2457 14.9128C20.9992 14.9128 23.2218 11.5658 23.2218 7.475C23.2218 3.3842 20.9992 0.037189 18.2457 0.037189V0ZM8.29351 3.7189C5.54007 3.7189 3.3174 7.06592 3.3174 11.1567C3.3174 15.2475 5.54007 18.5945 8.29351 18.5945C11.047 18.5945 13.2696 15.2475 13.2696 11.1567C13.2696 7.06592 11.047 3.7189 8.29351 3.7189ZM24.0512 15.4706C22.6247 17.3673 20.6674 18.5201 18.4448 18.5945C19.3405 20.0077 19.9044 21.7184 19.9044 23.5778V26.0323H26.5392V19.8589C26.5392 17.9251 25.5108 16.2516 24.0512 15.4334V15.4706ZM2.48805 19.1895C1.0284 20.0077 0 21.6812 0 23.615V29.7884H16.587V23.615C16.587 21.6812 15.5586 20.0077 14.099 19.1895C12.6061 21.1606 10.5825 22.3134 8.29351 22.3134C6.0045 22.3134 3.98089 21.1234 2.48805 19.1895Z"
+        fill="#E4B200"/>
+</svg>

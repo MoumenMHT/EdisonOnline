@@ -1,0 +1,30 @@
+﻿.p-tag {
+    background: var(--btn-primary-background);
+    color: var(--btn-primary-color);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.25rem 0.4rem;
+    border-radius: var(--border-radius);
+
+    &.p-tag-success {
+        background: var(--btn-success-background);
+        color: var(--btn-success-color);
+    }
+    &.p-tag-info {
+        background: var(--btn-info-background);
+        color: var(--btn-info-color);
+    }
+    &.p-tag-warning {
+        background: var(--btn-warning-background);
+        color: var(--btn-warning-color);
+    }
+    &.p-tag-danger {
+        background: var(--btn-danger-background);
+        color: var(--btn-danger-color);
+    }
+    
+    .p-tag-icon {
+        margin-right: 0.25rem;
+        font-size: 0.75rem;
+    }
+}

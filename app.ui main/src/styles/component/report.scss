@@ -1,0 +1,405 @@
+﻿@mixin data-table($p: null) {
+    display: table;
+    table-layout: fixed;
+    width: calc(100% - 21px - 21px); // 21px for left and right side
+    margin: 21px;
+    border-radius: 16px;
+    border: 1px solid #E4B200;
+    
+    overflow: hidden;
+
+    @if ($p) {
+        background: #fff;
+    } @else {
+        background: rgba(217, 217, 217, 0.13);
+    }
+    
+    > .data-table-body {
+        display: table-row-group;
+
+        > .data-table-row {
+            display: table-row;
+
+            &.header {
+                @if ($p) {
+                    background: #fff;
+                } @else {
+                    background: rgba(0, 0, 0, 0.13);
+                }
+            }
+
+            &:not(:last-child) {
+                > .data-table-cell {
+                    @if ($p) {
+                        border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+                    } @else {
+                        border-bottom: 1px solid rgba(255, 255, 255, 0.29);
+                    }
+                }
+            }
+
+            > .data-table-cell {
+                display: table-cell;
+                padding: 0.5rem 1rem;
+
+                &:not(:last-child) {
+                    @if ($p) {
+                        border-right: 1px solid rgba(0, 0, 0, 0.5);
+                    } @else {
+                        border-right: 1px solid rgba(255, 255, 255, 0.29);
+                    }
+                    
+                }
+                
+                &.ellipsis {
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
+
+                &.link {
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+.data-table-wrapper {
+    @include data-table;
+}
+
+.report-wrapper {
+    display: flex;
+    flex-direction: column;
+    // 1200px is the min size before this layout breaks.
+    min-width: calc(1200px);
+    max-width: calc(2000px);
+    margin: auto;
+
+    > div:not(:last-of-type) {
+        border-bottom: 1px solid var(--primary-500);
+    }
+
+    .report-container,
+    > .container {
+        display: flex;
+        flex-direction: column;
+        padding: 0.5rem 5rem;
+        
+        &:not(:last-of-type) {
+            border-bottom: 1px solid var(--primary-500);
+        }
+
+        &.chart {
+            > .chart {
+                margin: 0 2rem;
+                
+                &.small {
+                    margin: 0 21.5rem;
+                }
+            }
+        }
+        &.justify-space-between {
+            justify-content: space-between;
+        }
+        &.no-border {
+            border: none;
+        }
+
+        .pill-recommendation {
+            //width: 54rem;
+            border-radius: 4rem;
+            border: 0.646px solid;
+            background: #5B5B5B;
+            padding: 1rem 0;
+
+            &.R {
+                border-color: var(--RAG-R-border);
+                color: var(--RAG-R-text);
+
+                svg {
+                    fill: var(--RAG-R);
+                }
+            }
+
+            &.A {
+                border-color: var(--RAG-A-border);
+                color: var(--RAG-A-text);
+
+                svg {
+                    fill: var(--RAG-A);
+                }
+            }
+
+            &.G {
+                border-color: var(--RAG-G-border);
+                color: var(--RAG-G-text);
+
+                svg {
+                    fill: var(--RAG-G);
+                }
+            }
+        }
+
+        > .header,
+        > .body {
+            > .data-table {
+                @include data-table;
+            }
+        }
+        
+        > .header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            
+            &.column {
+                flex-direction: column;
+            }
+
+            > .header-left, 
+            > .header-right {
+                &.flex {
+                    display: flex;
+                }
+                &.flex-column {
+                    flex-direction: column;
+                }
+                &.justify-space-between {
+                    justify-content: space-between;
+                }
+                
+                > .headline {
+                    color: #E4B200;
+                    font-family: var(--font-family);
+                    font-size: 2rem;
+                    font-weight: 700;
+
+                    &.center-text {
+                        text-align: center;
+                    }
+                }
+                
+                > .textbox {
+                    padding: 0.5rem;
+                    border-radius: 0.6rem;
+                    border: 1px solid #E4B200;
+                    background: rgba(217, 217, 217, 0.13);
+                    max-width: 50rem;
+                    
+                    &.large-text {
+                        font-size: 2rem;
+                        
+                        > p {
+                            font-size: 3.5rem;
+                        }
+                    }
+                    
+                    &.center-text {
+                        text-align: center;
+                    }
+
+                    > p {
+                        color: #E4B200;
+                        margin: 0.5rem 0;
+                        font-family: var(--font-family);
+                        font-weight: 700;
+                    }
+                }
+            }
+            
+            > .header-left {
+                margin-right: 2rem;
+            }
+            
+            > .header-right {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                > .headline {
+                    font-size: 2rem;
+                    
+                    &.small {
+                        font-size: 1rem;
+                    }
+                }
+
+                > .subline {
+                    color: #E4B200;
+                    font-family: var(--font-family);
+                    font-size: 1.25rem;
+                    font-weight: 700;
+                    margin-top: 0.5rem;
+
+                    &.center {
+                        text-align: center;
+                    }
+
+                    > p,span {
+                        color: #ffffff;
+                        
+                        @media print {
+                            color: #000;
+                        }
+                    }
+                }
+            }
+
+            > .headline {
+                color: #E4B200;
+                font-family: var(--font-family);
+                font-size: 2rem;
+                font-weight: 700;
+                line-height: 1.75rem;
+                margin: 1.5rem 0;
+
+                &.text-align-left {
+                    text-align: left;
+                }
+                &.text-align-center {
+                    text-align: center;
+                }
+                &.text-align-right {
+                    text-align: right;
+                }
+                &.small {
+                    font-size: 1rem;
+                }
+
+                > span {
+                    color: #ffffff;
+                }
+            }
+        }
+        > .body {
+            display: flex;
+            flex-direction: row;
+            align-content: stretch;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            margin: 1.5rem 0;
+            
+            &.right {
+                justify-content: right;
+            }
+            &.left {
+                justify-content: left;
+            }
+            &.center {
+                align-content: center;
+            }
+            &.column {
+                flex-direction: column;
+            }
+            
+            .headline {
+                color: #E4B200;
+                font-family: var(--font-family);
+                font-size: 2rem;
+                font-weight: 700;
+                line-height: 1.75rem;
+                margin-bottom: 1.5rem;
+
+                &.text-align-left {
+                    text-align: left;
+                }
+                &.text-align-center {
+                    text-align: center;
+                }
+                &.text-align-right {
+                    text-align: right;
+                }
+                &.small {
+                    font-size: 1.5rem;
+                }
+                
+                > span {
+                    color: #ffffff;
+                    
+                    @media print {
+                        color: #000;
+                    }
+                }
+            }
+        }
+        > .textbox {
+            padding: 0.5rem 1rem;
+            border-radius: 0.6rem;
+            border: 1px solid #E4B200;
+            background: rgba(217, 217, 217, 0.13);
+            margin: 1rem 0;
+            color: #FFF;
+            line-height: 1.5rem; /* 250% */
+        }
+    }
+}
+
+@media print {
+    .report-wrapper {
+        color: #000 !important;
+        min-width: 0 !important;
+        min-height: 0;
+        overflow: visible;
+
+        .report-container,
+        > .container {
+            padding: 0 !important;
+            //display: block !important;
+
+            &.chart {
+                padding: 1rem 0 !important;
+                > .chart {
+                    margin: 0 !important;
+                    height: 100% !important;
+                    min-height: 300px !important;
+                }
+            }
+
+            > .header,
+            > .body {
+                > .data-table {
+                    @include data-table(1);
+                }
+            }
+            
+            > .header {
+                &:not(.printRow) {
+                    flex-direction: column !important;
+
+                    .header-left {
+                        margin-bottom: 1rem;
+                    }
+                }
+
+                > .header-left,
+                > .header-right {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                > .headline {
+                    margin: 1rem 0 0 0 !important;
+
+                    &.text-color {
+                        color: #000 !important;
+                    }
+                }
+            }
+            .pill-recommendation {
+                background-color: #fff;
+            }
+            > .textbox {
+                color: #000 !important;
+            }
+        }
+    }
+    .data-table-wrapper {
+        @include data-table(1);
+    }
+}

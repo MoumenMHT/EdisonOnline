@@ -1,0 +1,18 @@
+.p-progressbar {
+  border: 0 none;
+  height: 1.5rem;
+  background: #5B5B5B;
+  border-radius: 1rem;
+}
+.p-progressbar .p-progressbar-value {
+  border: 0 none;
+  margin: 0;
+  background: #E4B200;
+}
+.p-progressbar .p-progressbar-label {
+  color: var(--surface-header);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}

@@ -1,0 +1,417 @@
+:root {
+    --text-color:#ffffff;// #495057
+    --text-color-secondary:rgba(255,255,255,0.4);
+    --text-color-header:#fff;
+    --text-color-footer:#fff;
+    
+    --primary-color:var(--primary-500); /* This is changes in the color scheme below! */
+    --primary-color-hover:var(--primary-400);
+    --primary-color-text:#000;
+
+    --border-color: #E4B200;
+
+    --hover-background: color-mix(in srgb, var(--primary-500) 20%, white 0%);
+// Table
+    --table-header: #2C2C2C;
+
+    --table-alternate-background: #575757;
+    
+// Forms & inputs
+    --form-text: var(--text-color-secondary);
+    --form-background: #3F3F3F;
+    --form-background-hover: #575757;
+    --form-border: #E4B200;
+    --form-border-hover: var(--highlight-text-color);
+    --form-border-focus: var(--focus-ring);
+    --form-filled-background: var(--highlight-bg);
+
+    --form-item-group-background: #ffffff;
+    --form-item-group-color: #343a40;
+
+    --form-cancel-color: #ea5455;
+    --form-cancel-color-hover: #e73d3e;
+
+    --colorpicker-background: #323232;
+    --colorpicker-border: #191919;
+    --colorpicker-handle: #ffffff;
+
+    --password-meter-weak: #ea5455;
+    --password-meter-medium: #ff9f42;
+    --password-meter-strong: #29c76f;
+
+    --splitter-gutter: #f8f9fa;
+    --splitter-gutter-handle: #dee2e6;
+
+    --galleria-caption-color: #f8f9fa;
+    --galleria-indicator-background: #ced4da;
+
+    // This is the arrows base color
+    --border-arrow-after: #ffffff;
+    // This is the border added to the arrow
+    --border-arrow-before: #f2f2f2;
+    
+// Buttons
+    // This is used to give all the buttons the same focus ring, color is set on each button
+    --btn-focus-ring: 0 0 0 0.2rem;
+    --btn-padding: 0.75rem 1.25rem;
+    --btn-padding-sm: 0.65625rem 1.09375rem;
+    --btn-padding-lg: 0.9375rem 1.5625rem;
+    
+    --btn-primary-background: var(--primary-500);
+    // This is needed so that it is possible to use it with opacity
+    --btn-primary-background-rgb: 26, 46, 84;
+    --btn-primary-color: #000;
+    --btn-primary-background-hover: var(--primary-600);
+    --btn-primary-color-hover: #000;
+    --btn-primary-background-active: var(--primary-400);
+    --btn-primary-color-active: #ffffff;
+    --btn-primary-box-shadow: var(--primary-200);
+    --btn-primary-focus-outline: #E2E8F0;
+    --btn-primary-focus-ring: var(--btn-focus-ring) var(--btn-primary-focus-outline);
+
+    --btn-secondary-background: #64748B;
+    // This is needed so that it is possible to use it with opacity
+    --btn-secondary-background-rgb: 100, 116, 139;
+    --btn-secondary-color: #ffffff;
+    --btn-secondary-background-hover: #475569;
+    --btn-secondary-color-hover: #ffffff;
+    --btn-secondary-background-active: #334155;
+    --btn-secondary-color-active: #ffffff;
+    --btn-secondary-box-shadow: #b0b9c6;
+    --btn-secondary-focus-outline: #E2E8F0;
+    --btn-secondary-focus-ring: var(--btn-focus-ring) var(--btn-secondary-focus-outline);
+
+    --btn-success-background: #22C55E;
+    // This is needed so that it is possible to use it with opacity
+    --btn-success-background-rgb: 34, 197, 94;
+    --btn-success-color: #ffffff;
+    --btn-success-background-hover: #16A34A;
+    --btn-success-color-hover: #ffffff;
+    --btn-success-background-active: #15803D;
+    --btn-success-color-active: #ffffff;
+    --btn-success-box-shadow: #88eaac;
+    --btn-success-focus-outline: #BBF7D0;
+    --btn-success-focus-ring: var(--btn-focus-ring) var(--btn-success-focus-outline);
+
+    --btn-info-background: #3B82F6;
+    // This is needed so that it is possible to use it with opacity
+    --btn-info-background-rgb: 59, 130, 246;
+    --btn-info-color: #ffffff;
+    --btn-info-background-hover: #2563EB;
+    --btn-info-color-hover: #ffffff;
+    --btn-info-background-active: #1D4ED8;
+    --btn-info-color-active: #ffffff;
+    --btn-info-box-shadow: #9dc1fb;
+    --btn-info-focus-outline: #E2E8F0;
+    --btn-info-focus-ring: var(--btn-focus-ring) var(--btn-info-focus-outline);
+
+    --btn-warning-background: #F59E0B;
+    // This is needed so that it is possible to use it with opacity
+    --btn-warning-background-rgb: 245, 158, 11;
+    --btn-warning-color: #ffffff;
+    --btn-warning-background-hover: #D97706;
+    --btn-warning-color-hover: #ffffff;
+    --btn-warning-background-active: #B45309;
+    --btn-warning-color-active: #ffffff;
+    --btn-warning-box-shadow: #facf85;
+    --btn-warning-focus-outline: #FDE68A;
+    --btn-warning-focus-ring: var(--btn-focus-ring) var(--btn-warning-focus-outline);
+
+    --btn-help-background: #A855F7;
+    // This is needed so that it is possible to use it with opacity
+    --btn-help-background-rgb: 168, 85, 247;
+    --btn-help-color: #ffffff;
+    --btn-help-background-hover: #9333EA;
+    --btn-help-color-hover: #ffffff;
+    --btn-help-background-active: #7E22CE;
+    --btn-help-color-active: #ffffff;
+    --btn-help-box-shadow: #d4aafb;
+    --btn-help-focus-outline: #E9D5FF;
+    --btn-help-focus-ring: var(--btn-focus-ring) var(--btn-help-focus-outline);
+
+    --btn-danger-background: #EF4444;
+    // This is needed so that it is possible to use it with opacity
+    --btn-danger-background-rgb: 239, 68, 68;
+    --btn-danger-color: #ffffff;
+    --btn-danger-background-hover: #DC2626;
+    --btn-danger-color-hover: #ffffff;
+    --btn-danger-background-active: #B91C1C;
+    --btn-danger-color-active: #ffffff;
+    --btn-danger-box-shadow: #f7a2a2;
+    --btn-danger-focus-outline: #FECACA;
+    --btn-danger-focus-ring: var(--btn-focus-ring) var(--btn-danger-focus-outline);
+
+    --btn-dark-background: #3F3F3F;
+    // This is needed so that it is possible to use it with opacity
+    --btn-dark-background-rgb: 63, 63, 63;
+    --btn-dark-color: #ffffff;
+    --btn-dark-background-hover: #5B5B5B;
+    --btn-dark-color-hover: #ffffff;
+    --btn-dark-background-active: #5B5B5B;
+    --btn-dark-color-active: #ffffff;
+    --btn-dark-box-shadow: #5B5B5B;
+    --btn-dark-focus-outline: #5B5B5B;
+    --btn-dark-focus-ring: var(--btn-focus-ring) var(--btn-danger-focus-outline);
+    
+    // This button only works as a outlined or text button.
+    --btn-plain-color: #6c757d;
+    --btn-plain-background-hover: #e9ecef;
+    --btn-plain-color-hover: #6c757d;
+    --btn-plain-background-active: #dee2e6;
+    --btn-plain-color-active: #6c757d;
+
+    --btn-speeddial-action-background: #495057;
+    --btn-speeddial-action-color: #ffffff;
+    --btn-speeddial-action-background-hover: #022354;
+    --btn-speeddial-action-color-hover: #ffffff;
+    
+// Messages
+    --msg-info-background: #e9e9ff;
+    --msg-info-color: #696cff;
+    --msg-info-border: #696cff;
+    --msg-info-icon: #696cff;
+
+    --msg-success-background: #e4f8f0;
+    --msg-success-color: #1ea97c;
+    --msg-success-border: #1ea97c;
+    --msg-success-icon: #1ea97c;
+
+    --msg-warning-background: #fff2e2;
+    --msg-warning-color: #cc8925;
+    --msg-warning-border: #cc8925;
+    --msg-warning-icon: #cc8925;
+
+    --msg-error-background: #ffe7e6;
+    --msg-error-color: #ff5757;
+    --msg-error-border: #ff5757;
+    --msg-error-icon: #ff5757;
+
+// RAG
+    --RAG-R: #EA5455;
+    --RAG-R-text: #ee7475;
+    --RAG-R-border: #EA5455;
+    
+    --RAG-A: var(--primary-color);
+    --RAG-A-text: var(--primary-color);
+    --RAG-A-border: var(--primary-color);
+    
+    --RAG-G: #29C76F;
+    --RAG-G-text: #1ea97c;
+    --RAG-G-border: #29C76F;
+    
+// Surface colors
+    //base header color
+    --surface-header: #3F3F3F;
+    //base content color
+    --surface-content: #2C2C2C;
+    //base footer color
+    --surface-footer: #2C2C2C;
+    //Base ground color.
+    --surface-ground: #2C2C2C;
+    //Color of a section on a ground surface.
+    --surface-section:rgba(217, 217, 217, 0.13);
+    //Color of a surface used as a card.
+    --surface-card:#3F3F3F;
+    //Color of overlay surfaces.
+    --surface-overlay:#ffffff;
+    //Color of a divider.
+    --surface-border:var(--primary-color);
+    //Color of an element in hover state.
+    --surface-hover:#f6f9fc;
+    
+/* Chart colors */
+    --chart-background-1: #E4B200;
+    --chart-background-2: #86EFAC;
+    --chart-background-3: #93C5FD;
+    --chart-background-4: #FCD34D;
+    --chart-background-5: #D8B4FE;
+    --chart-background-6: #FCA5A5;
+
+    --chart-border-1: #E4B200;
+    --chart-border-2: #86EFAC;
+    --chart-border-3: #93C5FD;
+    --chart-border-4: #FCD34D;
+    --chart-border-5: #D8B4FE;
+    --chart-border-6: #FCA5A5;
+
+    --chart-hover-1: #E4B200;
+    --chart-hover-2: #86EFAC;
+    --chart-hover-3: #93C5FD;
+    --chart-hover-4: #FCD34D;
+    --chart-hover-5: #D8B4FE;
+    --chart-hover-6: #FCA5A5;
+    
+/* Color scheme */
+    --surface-0:#ffffff; /* This is not generated! */ 
+/* Anything below this is autogenerated */
+    --surface-50:#fafafa;
+    --surface-100:#e8e8e8;
+    --surface-200:#d5d5d5;
+    --surface-300:#c3c3c3;
+    --surface-400:#b0b0b0;
+    --surface-500:#9e9e9e;
+    --surface-600:#868686;
+    --surface-700:#6f6f6f;
+    --surface-800:#575757;
+    --surface-900:#3f3f3f;
+    --red-50:#fcf3f4;
+    --red-100:#f1c7c9;
+    --red-200:#e69a9d;
+    --red-300:#da6e72;
+    --red-400:#cf4147;
+    --red-500:#c4151c;
+    --red-600:#a71218;
+    --red-700:#890f14;
+    --red-800:#6c0c0f;
+    --red-900:#4e080b;
+    --blue-50:#f5f6f7;
+    --blue-100:#cdd3d6;
+    --blue-200:#a6b1b6;
+    --blue-300:#7e8e96;
+    --blue-400:#576c76;
+    --blue-500:#2f4956;
+    --blue-600:#283e49;
+    --blue-700:#21333c;
+    --blue-800:#1a282f;
+    --blue-900:#131d22;
+    --green-50:#f9faf5;
+    --green-100:#e3e8d0;
+    --green-200:#ccd5ab;
+    --green-300:#b6c385;
+    --green-400:#9fb060;
+    --green-500:#899e3b;
+    --green-600:#748632;
+    --green-700:#606f29;
+    --green-800:#4b5720;
+    --green-900:#373f18;
+    --yellow-50:#fefbf3;
+    --yellow-100:#f9ecc5;
+    --yellow-200:#f4dd97;
+    --yellow-300:#f0ce6a;
+    --yellow-400:#ebbf3c;
+    --yellow-500:#e6b00e;
+    --yellow-600:#c4960c;
+    --yellow-700:#a17b0a;
+    --yellow-800:#7f6108;
+    --yellow-900:#5c4606;
+    --cyan-50:#f7f9fa;
+    --cyan-100:#d8e2e8;
+    --cyan-200:#b9cbd6;
+    --cyan-300:#9ab3c3;
+    --cyan-400:#7b9cb1;
+    --cyan-500:#5c859f;
+    --cyan-600:#4e7187;
+    --cyan-700:#405d6f;
+    --cyan-800:#334957;
+    --cyan-900:#253540;
+    --pink-50:#fef4f7;
+    --pink-100:#fac9da;
+    --pink-200:#f69ebc;
+    --pink-300:#f1749e;
+    --pink-400:#ed4981;
+    --pink-500:#e91e63;
+    --pink-600:#c61a54;
+    --pink-700:#a31545;
+    --pink-800:#801136;
+    --pink-900:#5d0c28;
+    --indigo-50:#f5f6fb;
+    --indigo-100:#d1d5ed;
+    --indigo-200:#acb4df;
+    --indigo-300:#8893d1;
+    --indigo-400:#6372c3;
+    --indigo-500:#3f51b5;
+    --indigo-600:#36459a;
+    --indigo-700:#2c397f;
+    --indigo-800:#232d64;
+    --indigo-900:#192048;
+    --teal-50:#f6fafa;
+    --teal-100:#d2e7e8;
+    --teal-200:#afd4d5;
+    --teal-300:#8cc2c3;
+    --teal-400:#68afb0;
+    --teal-500:#459c9e;
+    --teal-600:#3b8586;
+    --teal-700:#306d6f;
+    --teal-800:#265657;
+    --teal-900:#1c3e3f;
+    --orange-50:#fdf9f4;
+    --orange-100:#f8e2c8;
+    --orange-200:#f2cb9d;
+    --orange-300:#ecb471;
+    --orange-400:#e69d46;
+    --orange-500:#e0861a;
+    --orange-600:#be7216;
+    --orange-700:#9d5e12;
+    --orange-800:#7b4a0e;
+    --orange-900:#5a360a;
+    --darkorange-50:#fdf7f4;
+    --darkorange-100:#f7dac9;
+    --darkorange-200:#f0bd9e;
+    --darkorange-300:#e9a073;
+    --darkorange-400:#e38248;
+    --darkorange-500:#dc651d;
+    --darkorange-600:#bb5619;
+    --darkorange-700:#9a4714;
+    --darkorange-800:#793810;
+    --darkorange-900:#58280c;
+    --darkgreen-50:#f2f9f6;
+    --darkgreen-100:#c3e0d3;
+    --darkgreen-200:#93c8b1;
+    --darkgreen-300:#63af8e;
+    --darkgreen-400:#33976c;
+    --darkgreen-500:#037e49;
+    --darkgreen-600:#036b3e;
+    --darkgreen-700:#025833;
+    --darkgreen-800:#024528;
+    --darkgreen-900:#01321d;
+    --bluegray-50:#f7f9f9;
+    --bluegray-100:#d9e0e3;
+    --bluegray-200:#bbc7cd;
+    --bluegray-300:#9caeb7;
+    --bluegray-400:#7e96a1;
+    --bluegray-500:#607d8b;
+    --bluegray-600:#526a76;
+    --bluegray-700:#435861;
+    --bluegray-800:#35454c;
+    --bluegray-900:#263238;
+    --purple-50:#f7f4f8;
+    --purple-100:#d9cbdc;
+    --purple-200:#bba3c0;
+    --purple-300:#9c7aa4;
+    --purple-400:#7e5189;
+    --purple-500:#60286d;
+    --purple-600:#52225d;
+    --purple-700:#431c4c;
+    --purple-800:#35163c;
+    --purple-900:#26102c;
+    --brown-50:#f9f6f4;
+    --brown-100:#e2d3c9;
+    --brown-200:#cbb09e;
+    --brown-300:#b38d74;
+    --brown-400:#9c6a49;
+    --brown-500:#85471e;
+    --brown-600:#713c1a;
+    --brown-700:#5d3215;
+    --brown-800:#492711;
+    --brown-900:#351c0c;
+    --gray-50:#f7f7f7;
+    --gray-100:#d7d7d8;
+    --gray-200:#b7b7b8;
+    --gray-300:#979799;
+    --gray-400:#78787a;
+    --gray-500:#58585b;
+    --gray-600:#4b4b4d;
+    --gray-700:#3e3e40;
+    --gray-800:#303032;
+    --gray-900:#232324;
+    --primary-50: #fefbf2;
+    --primary-100: #f9edc2;
+    --primary-200: #f3de91;
+    --primary-300: #eecf61;
+    --primary-400: #e9c130;
+    --primary-500: #e4b200;
+    --primary-600: #c29700;
+    --primary-700: #a07d00;
+    --primary-800: #7d6200;
+    --primary-900: #5b4700;
+}
