@@ -399,6 +399,8 @@ html, body {
   white-space: nowrap;
   border-color: #000;
   overflow: hidden;
+  border: 1px solid black !important;
+  outline: none !important;
   text-overflow: ellipsis;
 }
 
