@@ -18,10 +18,10 @@
 
        <div class="dropdown mb-3 ml-4 md:ml-8 flex items-center">
         <label for="titleSelect" class="title mr-4">Titel:</label>
-        <select id="titleSelect"   class="title w-11 cursor-pointer bg-transparent border-transparent px-3 py-2 ">
-          <option style="background-color: black; color: white;" value="option1">Hvad lever er fuld af</option>
-          <option style="background-color: black; color: white;" value="option2">Mulighed 2</option>
-          <option style="background-color: black; color: white;" value="option3">Mulighed 3</option>
+        <select id="titleSelect" class="title w-11 cursor-pointer bg-transparent  px-3 py-2 ">
+          <option style="background-color: black; color: white; border-color: #000;" value="option1">Hvad lever er fuld af</option>
+          <option style="background-color: black; color: white; border-color: #000" value="option2">Mulighed 2</option>
+          <option style="background-color: black; color: white; border-color: #000" value="option3">Mulighed 3</option>
         </select>
 
     
@@ -48,7 +48,7 @@
             <thead>
               <tr>
                 <th>Område
-                  <label class="checkbox-wrapper">
+                  <label class="checkbox-wrapperTh">
                       <input type="checkbox"@change="toggleAll":checked="allChecked" />
                       <span class="custom-checkbox">
                         <svg  width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -105,7 +105,7 @@
                   <td class="category">{{ row.name }}
                     <label class="checkbox-wrapper">
                       <input type="checkbox" v-model="row.checked" />
-                      <span class="custom-checkbox">
+                      <span id="custom-checkbox">
                         <svg  width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                           <rect width="20" height="20" fill="url(#pattern0_2)"/>
                           <defs>
@@ -287,7 +287,6 @@ export default {
   margin: 20px auto;
 }
 
-/* Style for dimmed (unchecked) rows */
 .inactive-row {
   opacity: 0.5;
   background-color: #f5f5f5;
@@ -364,9 +363,9 @@ html, body {
   visibility: hidden;
   width: 450px;
   font-weight: 100;
-  background-color: #e7e7e7;
+  background-color: #dbd7c7;
   font-family: 'Spline Sans', sans-serif;
-  color: black;
+  color: rgb(0, 0, 0);
   border-radius: 25px;
   padding: 8px;
   position: absolute;
@@ -376,7 +375,7 @@ html, body {
   left: 75%;
   transform: translateX(-50%);
   opacity: 0;
-  transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.7s ease-in-out;
 }
 
 .tooltip-text::after {
@@ -398,6 +397,7 @@ html, body {
   color: #fff;
   margin: 0;
   white-space: nowrap;
+  border-color: #000;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -580,14 +580,14 @@ td {
 .left {
   border-right: 1px solid #0000003d;
   width: 100%;
-  max-width: 78%;
+  max-width: 79%;
   box-sizing: border-box;
   padding-right: 1rem;
 }
 
 .right {
   width: 100%;
-  max-width: 22%;
+  max-width: 21%;
   box-sizing: border-box;
   padding-left: 1rem;
 
@@ -595,7 +595,7 @@ td {
 
 .info {
   margin: 1rem auto;
-  margin-top: 100px;
+  margin-top: 20px;
   width: 100%;
   font-family: 'Spline Sans', sans-serif;
   max-width: 26.125rem;
@@ -608,7 +608,7 @@ td {
 .info2{
   margin: auto;
   font-family: 'Spline Sans', sans-serif;
-  margin-top: 170px;
+  margin-top: 80px;
   width: 100%;
   max-width: 26.125rem;
   background-color: #00000017;
@@ -642,6 +642,7 @@ td {
     left: -2.2rem;
 
   }
+  
 
   .checkbox-wrapper input[type="checkbox"] {
     display: none;
@@ -670,11 +671,37 @@ td {
     stroke-width: 3;
   }
 
+
   .checkbox-wrapper input:checked + .custom-checkbox {
     background-color: #ffffff;
     border:  none;
     
   }
+  
+
+  .checkbox-wrapperTh {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    position: absolute;
+    left: -1.35rem;
+
+  }
+  
+
+  .checkbox-wrapperTh input[type="checkbox"] {
+    display: none;
+  }
+    .checkbox-wrapperTh input:checked + .custom-checkbox svg {
+    display: block;
+  }
+    .checkbox-wrapperTh input:checked + .custom-checkbox {
+    background-color: #ffffff;
+    border:  none;
+    
+  }
+  
+
 .presentationIcon{
   position: absolute;
   width: 15px;
